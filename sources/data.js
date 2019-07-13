@@ -101,7 +101,7 @@ let insertOrders=()=>{
 let insertOrderWithUser=(menuId)=>{
     if(menuId!==undefined){
         let userData=[];
-        require('../controller/user').all().then(result=>{
+        require('../controller/user/user').all().then(result=>{
             // console.log(JSON.stringify(result));
             let userId=result[Math.floor(Math.random()*result.length)].id;
             // console.log(userId);

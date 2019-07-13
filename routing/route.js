@@ -1,20 +1,23 @@
-const app = require('../app.js');
-const userInsert = require('../controller/user/insert');
-const ordersController = require('../controller/orders/order');
-const menuController = require('../controller/menu/menu');
-const allUsers=require('../controller/user/all');
-const user=require('../controller/user');
-const userOrders = require('../controller/allOrders');
-const Orders=require('../controller/orders/allWithMenu');
-const oneData=require('../controller/oneData');
-const login = require('../controller/user/login');
+//      --Default Nodejs modules--      //
 const express = require('express');
-
-const view = __dirname + '/../views/html/';
-
+const app = require('../app.js');
 const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
+
+//      --Custom modules--              //
+const UserController = require('../controller/user/user');
+const OrdersController = require('../controller/orders/order');
+const MenuController = require('../controller/menu/menu');
+const userOrders = require('../controller/allOrders');
+const Orders=require('../controller/orders/allWithMenu');
+const oneData=require('../controller/oneData');
+const BaseController=require('../controller/BaseController');
+
+
+const view = __dirname + '/../views/html/';
+
+
 
 // /home/zdravko/Documents/programiranje/rajko_node/views/html/index.html
 
@@ -40,14 +43,14 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/user/login', (req, res) => {
-    login(req, res);
+    UserController.login(req,res);
     // res.end();
 });
 
 
 app.post('/user/insert', (req, res) => {
     console.log(req.body);
-    userInsert(req, res);
+    UserController.storeUsers(req,res);
 });
 
 
@@ -60,17 +63,15 @@ app.get('/orders', (req, res) => {
 });
 
 app.get('/orders/all', (req, res) => {
-    ordersController.allOrders(req, res).then(allOrderData=>{
-        if(allOrders!==undefined){
-            res.end(JSON.stringify(allOrderData))
-        }
+    BaseController().then(result=>{
+        res.end(JSON.stringify(result));
     });
 });
 
 app.post('/orders/insert', (req, res) => {
-    login(req,res).then(approve=>{
+    UserController.login(req,res).then(approve=>{
         if(approve){
-            ordersController.storeOrders(req, res);
+            OrdersController.storeOrders(req, res);
         }else{
             res.json('Invalid creditials');
         }
@@ -79,7 +80,7 @@ app.post('/orders/insert', (req, res) => {
 });
 
 app.post('/menu/insert', (req, res) => {
-    menuController.insertMenu(req, res);
+    MenuController.insertMenu(req, res);
 });
 
 
@@ -90,7 +91,7 @@ app.get('/all', (req, res) => {
 });
 
 app.get('/menu/all', (req, res) => {
-    menuController.getAllMenus(req, res);
+    MenuController.getAllMenus(req, res);
 });
 
 app.get('/orders/all', (req, res) => {
@@ -98,24 +99,23 @@ app.get('/orders/all', (req, res) => {
 });
 
 app.get('/users/all',(req,res)=>{
-    user.all().then(users=>{
+    UserController.all().then(users=>{
         res.end(JSON.stringify(users));
     });
 });
 
 app.get('/users/get',(req,res)=>{
     console.log(req.query.id);
-    user.findById(req.query.id).then(result=>{
+    UserController.findById(req.query.id).then(result=>{
         if(result!==undefined){
             res.end(JSON.stringify(result));
         }
     });
-    // res.end('newst');
 });
 
 app.get('/users/find',(req,res)=>{
     console.log(req.body.mail);
-    user.findByMail(req.body.mail).then(user=>{
+    UserController.findByMail(req.body.mail).then(user=>{
         res.end(JSON.stringify(user));
     });
 });
@@ -123,7 +123,7 @@ app.get('/users/find',(req,res)=>{
 app.get('/orders/find',(req,res)=>{
     id=req.query.id;
     console.log(id);
-    ordersController.find(id).then(order=>{
+    OrdersController.find(id).then(order=>{
         console.log(order);
         res.end(JSON.stringify(order));
     });
@@ -132,7 +132,7 @@ app.get('/orders/find',(req,res)=>{
 app.get('/menu/find',(req,res)=>{
     console.log(req.query.id);
     if(req.query.id!==undefined){
-        menuController.findById(req.query.id).then(response=>{
+        MenuController.findById(req.query.id).then(response=>{
             res.end(JSON.stringify(response));
         });
     }
@@ -150,4 +150,22 @@ app.get('/ord/all',(req,res)=>{
         res.end(JSON.stringify(data));
     });
     // res.end(JSON.stringify({error:'Not found'}));
+});
+
+///     testing orders find method
+app.get('/orders/where',(req,res)=>{
+    try{
+        console.log(req.query);
+        let condition=req.query.condition;
+        let value=req.query.value;
+        // console.log(condition);
+        OrdersController.where(condition,value).then(result=>{
+            res.end(JSON.stringify(result));
+        });
+    }catch(e){
+        let message='Queries not found';
+        res.end(JSON.stringify(message));
+    }
+    
+   
 });

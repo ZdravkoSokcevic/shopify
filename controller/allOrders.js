@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const userModel = require('../model/user');
 const ordersModel = require('../model/orders');
-const userController=require('../controller/user');
+const userController=require('./user/user');
 const menuController=require('../controller/menu/menu');
 const menuModel = require('../model/menu');
 
@@ -35,12 +35,6 @@ let findAllUsers = () => {
                 res(JSON.parse(JSON.stringify(userData)));
             }
         });
-        // let query=userModel.find({});
-        // let data=query.exec((err,doc)=>{
-        //     doc.forEach(element => {
-        //         console.log(mongoose.Types.ObjectId(doc._id));
-        //     });
-        // });
     });
 }
 
@@ -74,12 +68,6 @@ let findAllOrders = () => {
 let joinDocs = (menus, users, orders) => {
     return new Promise((resolve, rejection) => {
         let data = [];
-        // console.log(users);
-        // console.log(orders);
-        // console.log(menus);
-        // orders.forEach(element => {
-        //     console.log(element.menuId);
-        // });
         for (let x = 0; x < orders.length; x++) {
             let id=orders[x].userId;
             let sinObjData={};
@@ -102,15 +90,8 @@ let joinDocs = (menus, users, orders) => {
                     // console.log(menuObj);
                 }).then(()=>{
                     let obj=[];
-                    // console.log(`menuO ${JSON.stringify(menuObj)}`);
-                    // console.log(`User: ${JSON.stringify(user)}`);
-                    // Object.assign(obj,menuObj,user);
-                    // obj.push(menuObj);
-                    // obj.push(user);
                     const AllData=Object.assign({},menuObj,user);
-                    // resolve(AllData);
                     data.push(AllData);
-                    // console.log(JSON.stringify(data));
                 });
                 
 
@@ -122,7 +103,6 @@ let joinDocs = (menus, users, orders) => {
                 resolve(data);
             }
         }
-        // console.log(data);
         
     });
 }

@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const order=require('../controller/orders/order');
 const menu=require('../controller/menu/menu');
-const user=require('../controller/user');
+const user=require('./user/user');
 
 async function oneData(req){
     let orderId=req.query.id;

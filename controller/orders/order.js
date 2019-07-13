@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Orders = require('../../model/orders.js');
+const Orders=require('../../model/orders');
 const Menu=require('../../model/menu');
 const User=require('../../model/user');
 
@@ -29,33 +29,35 @@ let orderController={
         });
     },
     allOrders : (req, res) => {
-        ordersModel.find({}, (err, doc) => {
-            if (err) {
-                res.end(err);
-            }
-            res.write(JSON.stringify(doc));
-            res.end();
+        return new Promise((resolve,rejection)=>{
+            require('../../model/orders').find({},(err, doc) => {
+                console.log(doc);
+                if (err) {
+                    rejection(err);
+                }else{
+                    resolve(doc);
+                }
+            });
         });
+        
     },
     find:(oId)=>{
-        // console.log(oId);
         return new Promise((res,rej)=>{
             oId=mongoose.Types.ObjectId(oId);
             let query=Orders.find({_id:oId}).populate('users').populate('menus');
             query.exec((err,doc)=>{
 
-                let allData=[doc];
-                // let resObjData={};
-                // Object.assign(resObjData,doc);
+                let allData=[];
+                allData.push({"Order:":doc});
                 let menuId=doc[0].menu;
                 let userId=doc[0].user;
                 Menu.find({id:menuId}).then(menuResult=>{
                     return menuResult;//Object.assign(resObjData,menuResult);
                 }).then((menuObj)=>{
                     allData.push({"Menu":menuObj});
-                    User.find({id:userId},(err,user)=>{
+                    User.find({id:userId},{'password':0},(err,user)=>{
+                        let userObj={};
                         allData.push({"User":user});
-                        // Object.assign(resObjData,user,menuObj);
                         res(allData);
                     });
                     
@@ -114,6 +116,27 @@ let orderController={
             //     // });
             // });
         });
+    },
+    where:(column,value)=>{
+        return new Promise((res,rej)=>{
+            try{
+                console.log(column);
+
+                let object={};
+                object[column]=value;
+                Orders.find(object,(err,doc)=>{
+                    if(err){
+                        let message='Not found';
+                        res(message);
+                    }else{
+                        res(doc);
+                    }
+                });
+            }catch(e){
+                res(e);
+            }
+        });
+        
     }
     
 
