@@ -1,0 +1,31 @@
+[{
+    "_id": "5d17ae92e6e220652ea496bc",
+    "userId": "5d17992b7b75184e3a53b9e1",
+    "menuId": "5ce5bc9b53268ec439d86e5d",
+    "count": "2"
+}, {
+    "_id": "5d17aea5e6e220652ea496bd",
+    "userId": "5d17992b7b75184e3a53b9e1",
+    "menuId": "5ce5bd7053268ec439d86e61",
+    "count": "1"
+}, {
+    "_id": "5d17aed0e6e220652ea496be",
+    "userId": "5d179703e6f5d74afb13806a",
+    "menuId": "5ce5be0253268ec439d86e65",
+    "count": "4"
+}, {
+    "_id": "5d17aedbe6e220652ea496bf",
+    "userId": "5d179703e6f5d74afb13806a",
+    "menuId": "5ce5be0253268ec439d86e65",
+    "count": "3"
+}, {
+    "_id": "5d17aef7e6e220652ea496c0",
+    "userId": "5d1798aaec271d4da702687b",
+    "menuId": "5ce5bdaa53268ec439d86e63",
+    "count": "2"
+}, {
+    "_id": "5d17af1ee6e220652ea496c2",
+    "userId": "5d1798aaec271d4da702687b",
+    "menuId": "5ce5bd2153268ec439d86e60",
+    "count": "1"
+}]

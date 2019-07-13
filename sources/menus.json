@@ -1,0 +1,86 @@
+[
+    {
+    "category": "pica",
+    "name": "Capricciosa",
+    "desc": "Paradajz pelat, kackavalj, sunka, sampionjoni",
+    "price": 520
+    },
+    {
+    "category": "pica",
+    "name": "Margherita",
+    "desc": "Paradajz pelat, kackavalj, bosiljak, masline",
+    "price": 440
+    },
+    {
+    "category": "pica",
+    "name": "Vesuvio",
+    "desc": "Paradajz pelat, kackavalj, sunka",
+    "price": 490
+    },
+    {
+    "category": "pica",
+    "name": "Meksicana",
+    "desc": "Paradajz pelat, kackavalj, ljuta kobasica, tabasko sos, feferoni",
+    "price": 640
+    },
+    {
+    "category": "pica",
+    "name": "Quattro Stagioni",
+    "desc": "Paradajz pelat, kackavalj, sunka, jaja, pecurke, pavlaka",
+    "price": 680
+    },
+    {
+    "category": "dezert",
+    "name": "Palacinke eurokrem",
+    "desc": "Eurokrem, plazma",
+    "price": 140
+    },
+    {
+    "category": "dezert",
+    "name": "Palacinke nutela",
+    "desc": "Nutela, plazma",
+    "price": 170
+    },
+    {
+    "category": "dezert",
+    "name": "Wafl",
+    "desc": "Krem, slag, sladoled, sezonsko voce",
+    "price": 250
+    },
+    {
+    "category": "dezert",
+    "name": "Vocni kup",
+    "desc": "slag, sladoled, sezonsko voce",
+    "price": 280
+    },
+    {
+    "category": "pice",
+    "name": "Domaca kafa",
+    "desc": "",
+    "price": 60
+    },
+    {
+    "category": "pice",
+    "name": "Caj",
+    "desc": "",
+    "price": 70
+    },
+    {
+    "category": "pice",
+    "name": "Coca-cola 0.25",
+    "desc": "",
+    "price": 100
+    },
+    {
+    "category": "pice",
+    "name": "Jelen pivo 0.5",
+    "desc": "",
+    "price": 100
+    },
+    {
+    "category": "pice",
+    "name": "Aquaviva 0.25",
+    "desc": "",
+    "price": 70
+    }
+    ]
