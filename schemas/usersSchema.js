@@ -16,6 +16,11 @@ var usersObject = {
     },
     password: {
         type: String
+    },
+    type:{
+        type:String,
+        enum:['user','admin'],
+        default:'user'
     }
 }
 // autoIncrement.initialize(mongoose.connection);

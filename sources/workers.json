@@ -1,17 +1,21 @@
 [{
     "ime": "peramile",
     "email": "pera@gmail.com",
-    "password": "mile123"
+    "password": "mile123",
+    "type":"admin"
 }, {
     "ime": "milepera",
     "email": "mile@gmail.com",
-    "password": "pera123"
+    "password": "pera123",
+    "type":"admin"
 }, {
     "ime": "zdravko",
     "email": "zdravko@gmail.com",
-    "password": "zdravko123"
+    "password": "zdravko123",
+    "type":"admin"
 }, {
     "ime": "peraperic",
     "email": "pera123@gmail.com",
-    "password": "petar123"
+    "password": "petar123",
+    "type":"user"
 }]

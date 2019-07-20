@@ -45,76 +45,30 @@ let orderController={
         return new Promise((res,rej)=>{
             oId=mongoose.Types.ObjectId(oId);
             let query=Orders.find({_id:oId}).populate('users').populate('menus');
-            query.exec((err,doc)=>{
-
-                let allData=[];
-                allData.push({"Order:":doc});
-                let menuId=doc[0].menu;
-                let userId=doc[0].user;
-                Menu.find({id:menuId}).then(menuResult=>{
-                    return menuResult;//Object.assign(resObjData,menuResult);
-                }).then((menuObj)=>{
-                    allData.push({"Menu":menuObj});
-                    User.find({id:userId},{'password':0},(err,user)=>{
-                        let userObj={};
-                        allData.push({"User":user});
-                        res(allData);
-                    });
+                query.exec((err,doc)=>{
+                    try{
+                        console.log(err);
+                        let allData=[];
+                        allData.push({"Order:":doc});
+                        let menuId=doc[0].menu;
+                        let userId=doc[0].user;
+                        Menu.find({id:menuId}).then(menuResult=>{
+                            return menuResult;//Object.assign(resObjData,menuResult);
+                        }).then((menuObj)=>{
+                            allData.push({"Menu":menuObj});
+                            User.find({id:userId},{'password':0},(err,user)=>{
+                                let userObj={};
+                                allData.push({"User":user});
+                                res(allData);
+                            });
+                            
+                        });
+                    }catch(err){
+                        res(err);
+                    } 
                     
                 });
-                
-                
-            });
-
-
-            // let allData=[];
-            // Orders.aggregate([{
-            //     $lookup:{
-            //         from:'menu',
-            //         localField:"_id",
-            //         foreignField:"menu",
-            //         as:"menuOrder"
-            //     }
-            // },{
-            //     $lookup:{
-            //         from:'user',
-            //         localField:"_id",
-            //         foreignField:"user",
-            //         as:"userOrder"
-            //     }
-                
-            // }]).exec((err,doc)=>{
-            //     console.log(doc);
-            //     // res(doc);
-            //     allData.push(doc);
-            // });
-            // allData.forEach(elem=>{
-            //     console.log(elem);
-            // });
-            // res(allData);
-
-            //  not returning user and menu
-            // let query=Orders.findById(oId);
-            // // console.log(query.exec());
-            // let data=query.exec().then((err,doc)=>{
-            //     console.log(doc);
-            //     res(doc);
-            //     let user=mongoose.Types.ObjectId(doc.user);
-            //     console.log(user);
-            // });
-
-            // console.log(data.menu);
-            // console.log(Menu.findById(data.menuId).exec());
-            // res(query.exec());
-
-            // MongoClient.connect(url,(err,db)=>{
-            //     // let dbo=db.db("shopify");
-                
-            //     // dbo.collection('orders').find({_id:oId}).toArray((err,result)=>{
-            //     //     console.log(result);
-            //     //     res(result);
-            //     // });
-            // });
+            
         });
     },
     where:(column,value)=>{

@@ -29,7 +29,7 @@ module.exports={
     },
     findById:(userId)=>{
         return new Promise((res,rej)=>{
-            User.findById(userId,(err,result)=>{
+            User.find({"id":userId},(err,result)=>{
                 // console.log(result);
                 if(result!==null){
                     res(result);
@@ -58,30 +58,41 @@ module.exports={
         return new Promise((resolve,reject)=>{
             let req=request.body;
             let data={
-                email:req.email,
-                password:req.password
+                email:      req.email,
+                password:   req.password
             };
             console.log(data);
             User.find(data,(err,doc)=>{
+                console.log(doc);
+                
                 if(!doc.length){
                     //not logged in
-                    res(false);
+                    resolve(false);
                 }else{
                     //logged in
-                    res(true);
+                    request.session.user=doc[0];
+                    console.log(request.session);
+                    resolve(true);
                 }
                 
                 // res.end();
             });
         });
     },
+    getLoggedIn:()=>{
+        return 1;
+    },
     storeUsers:(request,response)=>{
         return new Promise((res,rej)=>{
             let data={
-                ime:request.body.ime,
-                email:request.body.email,
-                password:request.body.password
+                id:         makeRandomId(16),
+                ime:        request.body.ime,
+                email:      request.body.email,
+                password:   request.body.password,
+                type:       request.body.type
             };
+            // console.log(data);
+            
             User.collection.insert(data,(err,docs)=>{
                 if(err){
                     rej(err);
@@ -93,4 +104,13 @@ module.exports={
             });
         })
     }
+}
+
+let makeRandomId=(length)=>{
+    let letters='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let id='';
+    for(let x=0;x<length;x++){
+        id+=letters.charAt(Math.floor(Math.random()*letters.length));
+    }
+    return id;
 }

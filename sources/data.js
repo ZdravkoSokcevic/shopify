@@ -68,14 +68,6 @@ let insertUsers=()=>{
                     Object.assign(doc[x],{'id':userId});
                     let obj = doc[x];
                     userModel.collection.insertOne(obj,(err,result)=>{
-                        // userModel.find({_id:result._id},(err,userDoc)=>{
-                        //     if(userDoc!==[]){
-                        //         let newId=Math.random().toString(36).substring(7);
-                        //         console.log(newId);
-                        //         userModel.save({_id:newId});    
-                        //     }
-                            
-                        // });
                     });
                 }
                 res(true);
@@ -87,11 +79,11 @@ let insertUsers=()=>{
 
 let insertOrders=()=>{
     return new Promise((res,rej)=>{
-        menuModel.find({},(err,doc)=>{
-            console.log(doc);
-            for(let x=0;x<doc.length;x++){
-                console.log(doc[x].id);
-                insertOrderWithUser(doc[x].id);
+        menuModel.find({},(err,menus)=>{
+            // console.log(menus);
+            for(let x=0;x<menus.length;x++){
+                console.log(menus[x].id);
+                insertOrderWithUser(menus[x].id);
             }
             // res(doc);
         });
@@ -104,7 +96,7 @@ let insertOrderWithUser=(menuId)=>{
         require('../controller/user/user').all().then(result=>{
             // console.log(JSON.stringify(result));
             let userId=result[Math.floor(Math.random()*result.length)].id;
-            // console.log(userId);
+            console.log(userId);
             let insertObject={
                 menu:menuId,
                 user:userId,

@@ -37,34 +37,9 @@ let menuController={
     },
     findById:(menuId)=>{
         return new Promise((res,rej)=>{
-            // console.log(`Menu id :${menuId}`);
-            
-            // mongoClient.connect(url,(err,db)=>{
-            //     let dbo=db.db("shopify");
-            //     dbo.collection('menus').find({_id:menuId}).toArray((err,menus)=>{
-            //         console.log(`Menu inside ${JSON.stringify(menus)}`);                    
-            //         res(menus);
-            //     });
-                
-            // });
-            // idd=mongoose.Types.ObjectId();
-            // let data=Menu.find({'_id':'ObjectId('+idd+')'},(err,doc)=>{
-            // console.log(err);
-            //     res(doc);
-            // });
-            let data=Menu.findById(menuId);
+            let data=Menu.find({id:menuId});
             console.log(data.exec());
             res(data.exec());
-
-            // Menu.find({},(err,doc)=>{
-            //     console.log(doc);
-            //     res(doc);
-            // });
-
-            // Menu.findById(menuId,(err,doc)=>{
-            //     console.log(doc);
-            //     res(doc);
-            // })
         });
     }
 

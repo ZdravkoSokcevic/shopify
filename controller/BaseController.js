@@ -3,16 +3,45 @@ const UserController=require('../controller/user/user');
 const OrdersController=require('../controller/orders/order');
 const MenuController=require('../controller/menu/menu');
 
+const session=require('express-session');
 
-async function returnData(){
- let allOrd=await allOrders();
- let contents=[];
-for(let order of allOrd){
-    // console.log(`Order: ${order}`);
-    contents.push(await OrdersController.find(order._id));
-    console.log(`Contents: ${contents}`)
-}
-return contents;
+let BaseController={
+    allData:async function returnallData(){
+        let allOrd=await allOrders();
+        let contents=[];
+        for(let order of allOrd){
+            // console.log(`Order: ${order}`);
+            contents.push(await OrdersController.find(order._id));
+            console.log(`Contents: ${contents}`)
+        }
+        return contents;
+    },
+    // async function findByUserId(id){
+    findByUserId:(async function get(id){
+            let data=[];
+            let orderData=await OrdersController.where('user',id);
+            // console.log(orderData);
+            for(let order of orderData){
+                await MenuController.findById(order.menu).then(result=>{
+                    data.push({"Menu":result,"Order":order});
+                });
+                
+            }
+        return data;
+    }),
+    ordersForLoggedIn:(req,res,next)=>{
+        return new Promise((resolve,rejection)=>{
+            let loggedUser=req.session.user;
+            if(loggedUser!==undefined){
+                BaseController.findByUserId(loggedUser.id).then(orders=>{
+                    resolve(orders);
+                });
+            }else{
+                resolve('You must be logged in for this');
+            }
+        });
+        
+    }
 }
 
 
@@ -50,4 +79,10 @@ let allData=(collection)=>{
             }
 }
 
-module.exports=returnData;
+module.exports=BaseController;
+
+
+
+//return new Promise((res,rej)=>{
+
+
