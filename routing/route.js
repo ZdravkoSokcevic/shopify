@@ -15,7 +15,7 @@ const oneData=require('../controller/oneData');
 const BaseController=require('../controller/BaseController');
 
 
-const Middleware=require('../controller/middleware/admin');
+const Middleware=require('../controller/middleware/middleware');
 
 const view = __dirname + '/../views/html/';
 const session=require('express-session');
@@ -26,9 +26,13 @@ const session=require('express-session');
 
 app.set('view engine', 'ejs');
 app.engine('html', ejs.renderFile);
-app.use(express.static(path.join(__dirname, 'views')));
+// console.log(__dirname+'/../views');
+app.use(express.static(__dirname+ '/../views'));
 // app.use(express.static(path.join(__dirname + 'sources')));
-
+// app.set('/styles',express.static(path.join(__dirname + '/../views/styles')));
+// app.set('/html',express.static(path.join(__dirname + '/views/html')));
+// app.set('/scripts',express.static(path.join(__dirname + '/views/scripts')));
+// app.set('/bootstrap',express.static(path.join(__dirname+'/sources/bootstrap/css')));
 
 //      --Basic middleware--        //
 app.use('/',(req,res,next)=>{
@@ -56,6 +60,17 @@ let AdminMiddleware=(route,method)=>{
             res.end(JSON.stringify(message));
         }
     });
+}
+
+let loggedInMiddleware=(route,method)=>{
+    app.all(route,(req,res,next)=>{
+        if(Middleware.isLoggedIn(req,res,next)){
+            next();
+        }else{
+            let message='Must be logged in';
+            res.end(JSON.stringify(message));
+        }
+    })
 }
 
 
@@ -100,11 +115,14 @@ app.post('/user/insert', (req, res) => {
 
 
 app.get('/orders', (req, res) => {
-    fs.readFile(view + 'orders.ejs', (err, data) => {
-        res.setHeader('Content-Type', 'text/html');
-        res.send(data);
-        res.end();
+    OrdersController.allOrders().then(data=>{
+        res.render('html/orders',{'data':JSON.stringify(data)});
     });
+    // fs.readFile(view + 'orders.ejs', (err, data) => {
+    //     res.setHeader('Content-Type', 'text/html');
+    //     res.send(data);
+    //     res.end();
+    // });
 });
 
 app.get('/orders/all', (req, res) => {
@@ -113,15 +131,9 @@ app.get('/orders/all', (req, res) => {
     });
 });
 
+loggedInMiddleware('/orders/insert','post');
 app.post('/orders/insert', (req, res) => {
-    UserController.login(req,res).then(approve=>{
-        if(approve){
-            OrdersController.storeOrders(req, res);
-        }else{
-            res.json('Invalid creditials');
-        }
-    })
-    
+    OrdersController.storeOrders(req, res);
 });
 
 app.get('/orderedById',(req,res)=>{
@@ -132,6 +144,7 @@ app.get('/orderedById',(req,res)=>{
     });
 });
 
+AdminMiddleware('/menu/insert','post');
 app.post('/menu/insert', (req, res) => {
     MenuController.insertMenu(req, res);
 });
@@ -228,6 +241,7 @@ app.get('/orders/where',(req,res)=>{
    
 });
 
+loggedInMiddleware('/orders/loggedIn','get');
 app.get('/orders/loggedIn',(req,res,next)=>{
     BaseController.ordersForLoggedIn(req,res,next).then((result)=>{
         res.end(JSON.stringify(result));

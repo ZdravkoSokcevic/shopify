@@ -1,0 +1,218 @@
+body {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #ddd0c0;
+  background-size: cover;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body #container {
+  opacity: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+body #container #header {
+  padding-top: 50px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 150px;
+  width: 100%;
+  background: transparent;
+}
+
+body #container #header #logo {
+  opacity: 0.7;
+  height: 100%;
+  width: 100px;
+  text-align: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+body #container #header #logo img {
+  height: 70%;
+  margin-top: 12px;
+}
+
+body #container #header #title h1 {
+  font-family: 'Allan';
+  text-align: center;
+  font-size: 4rem;
+  cursor: pointer;
+}
+
+body #container #header #nav-right {
+  text-align: center;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body #container #header #nav-right #login-btn {
+  border: 4px solid transparent;
+  background: transparent;
+  color: wheat;
+  border-radius: 2px;
+}
+
+body #container #header #nav-right #login-btn:hover {
+  border: 1px solid aliceblue;
+  height: 70%;
+  width: 60px;
+  -webkit-transition: 300ms ease-in;
+  transition: 300ms ease-in;
+}
+
+body #container #header #nav-right img {
+  height: 70%;
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+
+body #container #header #nav-right img:hover {
+  border: 1px solid wheat;
+  -webkit-transition: 300ms ease-in;
+  transition: 300ms ease-in;
+}
+
+body #header-background {
+  position: absolute;
+  max-width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  top: 0px;
+  z-index: -50;
+}
+
+body #cover-photo {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  z-index: -100;
+  opacity: 0.6;
+  background-repeat: repeat-y;
+}
+
+body .main-section {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+body .main-section .cards {
+  opacity: 0.7;
+  overflow: scroll;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 20px;
+  position: relative;
+  height: 100%;
+  scrollbar-width: none;
+}
+
+body .main-section .cards .card {
+  opacity: 1;
+  height: 80px;
+  margin: 10px;
+  opacity: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body .main-section .cards .card__image {
+  height: 100%;
+  border-radius: 4%;
+}
+
+body .main-section .cards::-webkit-scrollbar {
+  width: 0px !important;
+}
+
+body .main-section .main-section::-webkit-scrollbar {
+  display: none;
+}
+
+body .main-section .left-navbar {
+  position: absolute;
+  z-index: 1000;
+  padding-top: 20px;
+  background-color: transparent;
+  opacity: 0.8;
+  height: 80%;
+  width: 30%;
+  top: 18%;
+  width: 220px;
+  overflow-y: scroll;
+}
+
+body .main-section .left-navbar .card {
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+}
+
+body .main-section .left-navbar .card:first-child {
+  margin-top: 0px;
+}
+
+body .main-section .left-navbar::-webkit-scrollbar {
+  width: 0px !important;
+}
+
+body .main-section .left-navbar::-webkit-scrollbar {
+  display: none;
+}
+
+body i.fa-chevron-right {
+  width: 20px;
+  height: 20px;
+  border: 1px solid gray;
+  position: absolute;
+  left: 15px;
+  bottom: 20px;
+  margin-left: 20px;
+}
+/*# sourceMappingURL=style.css.map */

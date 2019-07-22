@@ -31,7 +31,7 @@ let orderController={
     allOrders : (req, res) => {
         return new Promise((resolve,rejection)=>{
             require('../../model/orders').find({},(err, doc) => {
-                console.log(doc);
+                // console.log(doc);
                 if (err) {
                     rejection(err);
                 }else{

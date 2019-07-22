@@ -16,7 +16,7 @@ let BaseController={
         }
         return contents;
     },
-    // async function findByUserId(id){
+    // get all data by user id
     findByUserId:(async function get(id){
             let data=[];
             let orderData=await OrdersController.where('user',id);
@@ -81,8 +81,5 @@ let allData=(collection)=>{
 
 module.exports=BaseController;
 
-
-
-//return new Promise((res,rej)=>{
 
 

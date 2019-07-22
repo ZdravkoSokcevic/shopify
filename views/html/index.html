@@ -5,31 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shopify</title>
-    <link rel="stylesheet" type="text/css" href="main-page.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome/css/all.css">
+    <link href='https://fonts.googleapis.com/css?family=Allan' rel='stylesheet'>
+    <link rel="stylesheet" href="/styles/bootstrap/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    
 </head>
 <body>
-    <p>Ime:
-    <input type="text" id="ime">
-    </p>
+    <div class="col-xs-sm-md-lg-12" id="container">
+        
+        <!-- HEADER SECTION -->
+        <div id="header-background"></div>
+        <img src="/assets/pictures/default(2).jpeg" id="cover-photo" srcset="">
+        <div class="col-xs-sm-md-lg-12" id="header">
+            <div class="col-xs-12 col-ms-4 col-md-3 col-lg-3" id="logo">
+                <img src="/assets/icons/logo.png" alt="" srcset="">
+            </div>
+            <div class="col-xs-12 col-ms-4 col-md-6 col-lg-6" id="title"><h1>Shopify</h1></div>
+            <div class="col-xs-12 col-ms-4 col-md-3 col-lg-3" id="nav-right">
+                <button id="login-btn">Login</button>
+                <img src="/assets/users/default.png" alt="">
+            </div>
+        </div>
 
-    <br>
-    <p>Email:
-    <input type="text" name="" id="email">
-    </p>
-    <br>
-    <p>Password:
-    <input type="password" name="" id="password">
-    </p>
-    <br>
-    <select name="type" id="type">
-        <option value="user" selected>User</option>
-        <option value="admin">Admin</option>
-    </select>
-    <br>
-    <br>
-    <input type="submit" id="potvr" value="Potvrdi">
 
-    <script src="jquery-3.4.1.min.js"></script>
-    <script src="main.js"></script>
+        <div class="main-section">
+            
+            <div class="cards">
+                
+                <div class="card card__main-section">
+                    <div class="card__image">
+                        <img src="" alt="" class="card__image-img">
+                    </div>
+                    <div class="card__title">Pica</div>
+                    <div class="card__price">12.25</div>
+                </div>
+            </div>
+
+            <div class="left-navbar">
+                    <div class="card">
+
+                    </div>
+                    <!-- <div class="card">2</div>
+                    <div class="card">3</div>
+                    <div class="card">4</div>
+                    <div class="card">5</div>
+                    <div class="card">6</div>
+                    <div class="card">7</div>
+                    <div class="card">8</div>
+                    <div class="card">9</div>
+                    <div class="card">10</div>
+                    <div class="card">11</div>
+                    <div class="card">12</div>
+                    <div class="card">13</div>
+                    <div class="card">14</div>
+                    <div class="card">15</div>
+                    <div class="card">16</div>
+                    <div class="card">17</div>
+                    <div class="card">18</div>
+                    <div class="card">19</div>
+                    <div class="card">20</div>
+                    <div class="card">21</div>
+                    <div class="card">22</div>
+                    <div class="card">23</div>
+                    <div class="card">24</div> -->
+            </div>
+
+        </div>
+
+    </div>
+    <i class="fa fa-chevron-right" aria-hidden="true"></i>    
+    
+    
+
+
+
+    <script src="/scripts/jquery-3.4.1.min.js"></script>
+    <script src="/scripts/actions.js"></script>
+    <script src="/scripts/dom.js"></script>
+    <script src="/scripts/api.js"></script>
+    <script src="/scripts/main.js"></script>
 </body>
 </html>

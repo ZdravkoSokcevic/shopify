@@ -32,9 +32,9 @@ app.use(bodyParser.json());
 
 
 
-app.use(express.static(__dirname + '/views/scripts'));
 
 
+// app.use(express.errorHandler());
 
 //////////////////////////////////////
 //      manage session              //
