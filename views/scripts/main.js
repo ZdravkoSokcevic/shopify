@@ -1,3 +1,4 @@
+
 // $('#potvr').on('click', () => {
 //     let obj = {
 //         ime:        $('#ime').val(),
@@ -25,6 +26,23 @@
 
 
 $(window).on('load',()=>{
-    console.log(api.allMenus);
-
+    intializeStart();
+    // console.log(data);
+    styleBeforeLogin.loginBtn();
+    console.log(storage.get('loggedUser'));
 });
+
+
+let intializeStart=()=>{
+    api.allMenus().then(data=>{
+        console.log(data);
+        fillWithElements.menus(data);
+    });
+}
+
+
+let storage={
+    get:key=>{
+        return (localStorage.getItem(key)!==null)?localStorage.getItem(key):false
+    }
+}

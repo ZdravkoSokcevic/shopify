@@ -4,7 +4,38 @@ let dom={
     loginButton:document.getElementById('nav-right').children[0],
     loginPicture:document.getElementById('nav-right').children[1],
     mainCards:document.getElementsByClassName('main-section')[0],
-    leftNavbar:document.getElementsByClassName('left-navbar')[0]   
+    leftNavbar:document.getElementsByClassName('left-navbar')[0],
+    defaultImage:'/assets/pictures/default-food.jpg'   
+}
+
+
+let detailModal={
+    container:document.getElementsByClassName('detail-modal')[0],
+    // For menus
+    title:document.getElementsByClassName('detail-modal')[0].children[0].children[1].children[0],
+    category:document.getElementsByClassName('detail-modal')[0].children[0].children[1].children[1],
+    detailImage:document.getElementsByClassName('detail-modal')[0].children[0].children[0].children[0],
+    closeButton:document.getElementsByClassName('detail-modal__close_btn')[0],
+    intialStyle:()=>{
+        detailModal.container.style.display='block';
+        detailModal.container.style.zIndex=2000;
+    },
+    removeElement:()=>{
+        detailModal.container.style.display='none';
+    },
+    setTitle:(title)=>{
+        detailModal.title.innerHTML=title;
+    },
+    setCategory:(category)=>{
+        detailModal.category.innerHTML=category;
+    },
+    fillModal:(dataType,data)=>{
+        detailModal.setTitle(data.name);
+        detailModal.setCategory(data.category);
+        (data.image!==undefined && data.image!=='')?detailModal.src=data.image:detailModal.src=dom.defaultImage;
+        // console.log(detailModal.detailImage);
+    listeners.closeModalBtnListener(detailModal.closeButton);
+    }
 }
 
 let styleBeforeLogin={
@@ -29,7 +60,7 @@ let fillWithElements={
 
 let fillDomCards={
     menu:(data,i)=>{
-        console.log(data);
+        // console.log(data);
 
         //  main div is container,div is one card
         let mainDiv=document.querySelector('.cards');
@@ -46,7 +77,7 @@ let fillDomCards={
         // append image,title and price 
         let title=document.createElement('div');
         title.className='card__title';
-        title.innerHTML=data.category;
+        title.innerHTML=data.name;
         card.appendChild(title);
 
         let price=document.createElement('div');
@@ -60,5 +91,5 @@ let fillDomCards={
     }
 }
 
-styleBeforeLogin.loginBtn();
-console.log(dom.leftNavbar);
+
+// console.log(dom.leftNavbar);

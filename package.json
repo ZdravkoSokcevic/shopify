@@ -21,6 +21,6 @@
         "error-handler": "1.0.0"
     },
     "scripts": {
-        "start": "nodemon ./routing/route.js"
+        "start": "node ./routing/route.js"
     }
 }

@@ -7,6 +7,11 @@ body {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+body div[class*="col-"] {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 body #container {
   opacity: 1;
   display: -webkit-box;
@@ -214,5 +219,49 @@ body i.fa-chevron-right {
   left: 15px;
   bottom: 20px;
   margin-left: 20px;
+}
+
+body .detail-modal {
+  display: none;
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  background-color: #ddd0c0;
+  margin: 0 !important;
+}
+
+body .detail-modal .header {
+  margin: 0 !important;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+body .detail-modal .header .detail__picture img {
+  position: relative;
+  width: 100%;
+}
+
+body .detail-modal .header .detail__about {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+body .detail-modal .header .detail__about .detail__about-title {
+  color: blue;
+}
+
+body .detail-modal .detail-modal__close_btn {
+  position: absolute;
+  height: 20px;
+  right: 10px;
+  top: 10px;
 }
 /*# sourceMappingURL=style.css.map */
