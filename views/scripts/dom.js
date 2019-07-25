@@ -38,6 +38,23 @@ let detailModal={
     }
 }
 
+let loginModal={
+    container:document.getElementsByClassName('modal-login-register')[0],
+    emailInput:document.getElementsByClassName('login-email')[0],
+    passwordInput:document.getElementsByClassName('login-password')[0],
+    loginSubmit:document.getElementsByClassName('modal-login-form__submit-button')[0],
+    register:document.getElementsByClassName('register')[0],
+    forgotPsswd:document.getElementsByClassName('forgot-psswd')[0],
+    closeButton:document.getElementsByClassName('close-login-modal__button')[0],
+    intialStyle:()=>{
+        loginModal.container.style.display='none';
+    },
+    show:()=>{
+        loginModal.container.style.display='block';
+        loginModal.container.style.zIndex=2000;
+    }
+}
+
 let styleBeforeLogin={
     loginBtn:()=>{
         dom.loginPicture.style.display='none';
@@ -85,9 +102,7 @@ let fillDomCards={
         price.innerHTML=data.price+' din';
         card.appendChild(price);
 
-        card.addEventListener('click',()=>{
-            listeners.addListener(card,data);
-        });
+        listeners.addListener(card,data,'allMenus');
     }
 }
 

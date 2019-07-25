@@ -264,4 +264,85 @@ body .detail-modal .detail-modal__close_btn {
   right: 10px;
   top: 10px;
 }
+
+body .modal-login-register {
+  display: none;
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  left: 10%;
+  top: 10%;
+  background-color: #ddd0c0;
+  text-align: center;
+}
+
+body .modal-login-register .modal-login-form__login-title {
+  color: red;
+}
+
+body .modal-login-register .modal-login-form__email {
+  height: 10%;
+}
+
+body .modal-login-register .modal-login-form__email .login-email {
+  width: 50%;
+  height: 98%;
+}
+
+body .modal-login-register .modal-login-form__password {
+  height: 10%;
+}
+
+body .modal-login-register .modal-login-form__password .login-password {
+  height: 98%;
+  width: 50%;
+}
+
+body .modal-login-register .modal-login-form__submit {
+  height: 15%;
+}
+
+body .modal-login-register .modal-login-form__submit .modal-login-form__submit-button {
+  margin-top: 2%;
+  background-color: blue;
+  border: 0;
+  color: white;
+  width: 50%;
+  height: 80%;
+  margin-bottom: 2%;
+}
+
+body .modal-login-register .modal-login-register__signup-options {
+  height: 15%;
+  width: 50%;
+  left: 25%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body .modal-login-register .modal-login-register__signup-options .modal-login-register__signup-options__signup {
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body .modal-login-register .close-login-modal__button {
+  position: absolute;
+  height: 20px;
+  right: 10px;
+  top: 10px;
+}
 /*# sourceMappingURL=style.css.map */

@@ -35,9 +35,12 @@ $(window).on('load',()=>{
 
 let intializeStart=()=>{
     api.allMenus().then(data=>{
-        console.log(data);
+        // console.log(data);
         fillWithElements.menus(data);
     });
+    loginModal.intialStyle();
+    // console.log(dom.loginButton);
+    listeners.addListener(dom.loginButton,'','loginBtnClick');
 }
 
 

@@ -72,7 +72,7 @@ module.exports={
                     //logged in
                     request.session.user=doc[0];
                     console.log(request.session);
-                    resolve(true);
+                    resolve(doc[0]);
                 }
                 
                 // res.end();

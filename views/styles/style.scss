@@ -257,5 +257,75 @@ body{
             top:10px;
         }
     }
+
+    // Login-Register modal
+    .modal-login-register{
+        display: none;  
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        left: 10%;
+        top: 10%;
+        background-color: #ddd0c0;
+        text-align: center;
+        
+        .modal-login-form__login-title{
+            color:red;
+        }
+        .modal-login-form__email{
+            height: 10%;
+            .login-email{
+                width: 50%;
+                height: 98%;
+                // box-sizing: unset!important;
+            }
+        }
+        .modal-login-form__password{
+            height: 10%;
+            .login-password{
+                height: 98%;
+                width: 50%;
+                // box-sizing: unset!important;
+            }
+        }
+        .modal-login-form__submit{
+            height: 15%;
+            .modal-login-form__submit-button{
+                margin-top: 2%;
+                background-color: blue;
+                border:0;
+                color:white;
+                width: 50%;
+                height: 80%;
+                margin-bottom:2%;
+            }
+        }
+        .modal-login-register__signup-options{
+            height: 15%;
+            width: 50%;
+            left:25%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            // justify-content: space-between;
+            // justify-content: baseline;
+            
+
+            .modal-login-register__signup-options__signup{
+                align-content: center;
+                justify-content: center;
+            }
+            .modal-login-register__signup-options__forgot-password{
+
+            }
+        }
+        .close-login-modal__button{
+            position: absolute;
+            height: 20px;
+            right: 10px;;
+            top: 10px;
+        }
+    }
     
 }
