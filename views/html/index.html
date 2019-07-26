@@ -18,14 +18,58 @@
         <!-- HEADER SECTION -->
         <div id="header-background"></div>
         <img src="/assets/pictures/default(2).jpeg" id="cover-photo" srcset="">
-        <div class="col-xs-sm-md-lg-12" id="header">
-            <div class="col-xs-12 col-ms-4 col-md-3 col-lg-3" id="logo">
+        
+        <!-- HEADER -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="header">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" id="logo">
                 <img src="/assets/icons/logo.png" alt="" srcset="">
             </div>
-            <div class="col-xs-12 col-ms-4 col-md-6 col-lg-6" id="title"><h1>Shopify</h1></div>
-            <div class="col-xs-12 col-ms-4 col-md-3 col-lg-3" id="nav-right">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="title"><h1>Shopify</h1></div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" id="nav-right">
                 <button id="login-btn">Login</button>
-                <img src="/assets/users/default.png" alt="">
+                <img src="/assets/users/default.png" class="profile-picture">
+            </div>
+        
+            <!-- Profile Modal -->
+            <div class="col-12 header__profile-modal">
+                <div class="col-12 header__profile-modal__container">
+                    <div class="col-9"></div>
+                    <div class="col-3 user-info">
+                        <!-- Name of user -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-3 user-info__name-picture">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="col-xs-9 user-info__name"><p class="user-info__username">Zdravko</p></div>
+                        </div>
+                        
+                        <!-- Email of user -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-3 user-info__email-picture">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="col-xs-9 user-info__email"><p class="user-info__email">zdravko@gmail.com</p></div>
+                        </div>
+                        
+                        <!-- Type of user -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-3 user-info__type-picture">
+                                <i class="fa fa-unlock"></i>
+                            </div>
+                            <div class="col-xs-9 user-info__type"><p class="user-info__type">admin</p></div>
+                        </div>
+                        
+                        <!-- Logout user -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-3 user-info__logout-picture">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </div>
+                            <div class="col-xs-3 user-info__logout"><p class="user-info__logout">Logout</p></div>
+                        </div>
+                        
+
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -44,32 +88,10 @@
             </div>
 
             <div class="left-navbar">
-                    <div class="card">
-
-                    </div>
-                    <!-- <div class="card">2</div>
-                    <div class="card">3</div>
-                    <div class="card">4</div>
-                    <div class="card">5</div>
-                    <div class="card">6</div>
-                    <div class="card">7</div>
-                    <div class="card">8</div>
-                    <div class="card">9</div>
-                    <div class="card">10</div>
-                    <div class="card">11</div>
-                    <div class="card">12</div>
-                    <div class="card">13</div>
-                    <div class="card">14</div>
-                    <div class="card">15</div>
-                    <div class="card">16</div>
-                    <div class="card">17</div>
-                    <div class="card">18</div>
-                    <div class="card">19</div>
-                    <div class="card">20</div>
-                    <div class="card">21</div>
-                    <div class="card">22</div>
-                    <div class="card">23</div>
-                    <div class="card">24</div> -->
+                    <div class="card menus">Menus</div>
+                    <div class="card My-Orders">My orders</div>
+                    <div class="card all_orders">All orders</div>
+                    <div class="card all_users">Users</div>
             </div>
 
         </div>
@@ -127,6 +149,7 @@
     <script src="/scripts/actions.js"></script>
     <script src="/scripts/dom.js"></script>
     <script src="/scripts/api.js"></script>
+    <script src="/scripts/auth.js"></script>
     <script src="/scripts/main.js"></script>
     <script src="/scripts/forms.js"></script>
 </body>

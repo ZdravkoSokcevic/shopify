@@ -1,3 +1,4 @@
+var LOGIN_PICTURE_CLICK=0;
 let listeners={
     addListener:(item,data='',typeOf='')=>{
         // console.log(typeOf);
@@ -33,6 +34,16 @@ let listeners={
                     loginModal.intialStyle();
                 });
                 // loginModal.show();
+            };break;
+            case 'profile-picture':{
+                if(LOGIN_PICTURE_CLICK++%2){
+                    userInfo.hide();
+                }else{
+                    userInfo.show();
+                    userInfo.infoContainer.style.display='flex';
+                }
+                
+                
             };break;
         }
         

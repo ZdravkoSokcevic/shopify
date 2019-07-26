@@ -2,11 +2,27 @@
 let forms={
     sendLoginForm:(email,password)=>{
         api.sendLoginData({email:email,password:password}).then(result=>{
-            if(result.length){
-                console.log("usao ovamo");
+            // console.log(result);
+            if(result.length && result){
+                // console.log("usao ovamo");
                 // storeInDb(result);
+                // console.log(result);
+                
+                //  Setup profile picture
+                dom.loginPicture.src=(result.image)?result.image:dom.defaultImage;
+                dom.loginPicture.addEventListener('click',()=>{
+                    listeners.addListener(dom.loginPicture,'','profile-picture');
+                });
+                
                 storeLocal(JSON.parse(result));
+                // isLoggedIn();
+                console.log(isAdmin());
                 loginModal.intialStyle();
+
+                //  switch pictures
+                dom.loginButton.style.display='none';
+                dom.loginPicture.style.display='';
+                // detailModal.detailImage.style.display='';
             } else console.log("Invalid creditials");
             console.log(JSON.parse(localStorage.getItem('user')));
             clearFormData();

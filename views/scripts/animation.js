@@ -7,7 +7,6 @@ let toggle={
         element.style.display='none'
     },
     show:(element)=>{
-        console.log(element);
         element.style.display='block';
     }
 }

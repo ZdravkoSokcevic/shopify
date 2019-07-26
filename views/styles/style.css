@@ -38,6 +38,9 @@ body #container #header {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-flex: 0 !important;
+      -ms-flex: 0 0 13% !important;
+          flex: 0 0 13% !important;
   height: 150px;
   width: 100%;
   background: transparent;
@@ -46,7 +49,6 @@ body #container #header {
 body #container #header #logo {
   opacity: 0.7;
   height: 100%;
-  width: 100px;
   text-align: center;
   -ms-flex-line-pack: center;
       align-content: center;
@@ -98,15 +100,60 @@ body #container #header #nav-right #login-btn:hover {
 }
 
 body #container #header #nav-right img {
-  height: 70%;
+  height: 50px;
+  width: 50px;
   border: 1px solid transparent;
-  border-radius: 50%;
+  border-radius: 100%;
 }
 
 body #container #header #nav-right img:hover {
   border: 1px solid wheat;
   -webkit-transition: 300ms ease-in;
   transition: 300ms ease-in;
+}
+
+body #container #header .header__profile-modal {
+  position: absolute;
+  height: 200px;
+  width: 100%;
+  top: 100%;
+  right: 0px;
+}
+
+body #container #header .header__profile-modal .header__profile-modal__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+body #container #header .header__profile-modal .header__profile-modal__container .user-info {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+body #container #header .header__profile-modal .header__profile-modal__container .user-info div.col-xs-12 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+body #container #header .header__profile-modal .header__profile-modal__container .user-info div.col-xs-12 div.col-9 {
+  text-align: center;
+}
+
+body #container #header .header__profile-modal .header__profile-modal__container .user-info div.col-xs-12 div.col-9 p {
+  margin-left: 10px;
 }
 
 body #header-background {

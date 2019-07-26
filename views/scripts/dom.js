@@ -5,6 +5,7 @@ let dom={
     loginPicture:document.getElementById('nav-right').children[1],
     mainCards:document.getElementsByClassName('main-section')[0],
     leftNavbar:document.getElementsByClassName('left-navbar')[0],
+    profileModal:document.getElementsByClassName('header__profile-modal')[0],
     defaultImage:'/assets/pictures/default-food.jpg'   
 }
 
@@ -53,6 +54,29 @@ let loginModal={
         loginModal.container.style.display='block';
         loginModal.container.style.zIndex=2000;
     }
+}
+
+let userInfo={
+    infoContainer:document.getElementsByClassName('user-info')[0],
+    userName:document.getElementsByClassName('user-info__username')[0],
+    email:document.getElementsByClassName('user-info__email')[0],
+    type:document.getElementsByClassName('user-info__type')[0],
+    logout:document.getElementsByClassName('user-info__logout')[0],
+    show:()=>{
+        toggle.show(userInfo.infoContainer);
+        userInfo.infoContainer.style.display='flex';
+    },
+    hide:()=>{
+        toggle.hide(userInfo.infoContainer);
+    }
+}
+
+let leftSidebar={
+    container:document.getElementsByClassName('left-navbar')[0],
+    menu:document.getElementsByClassName('menus')[0],
+    myOrders:document.getElementsByClassName('My-orders')[0],
+    allOrders:document.getElementsByClassName('all_orders')[0],
+    allUsers:document.getElementsByClassName('all_users')[0]
 }
 
 let styleBeforeLogin={
