@@ -23,7 +23,6 @@ const session=require('express-session');
 
 
 // /home/zdravko/Documents/programiranje/rajko_node/views/html/index.html
-
 app.set('view engine', 'ejs');
 app.engine('html', ejs.renderFile);
 // console.log(__dirname+'/../views');

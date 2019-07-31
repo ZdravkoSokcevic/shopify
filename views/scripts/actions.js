@@ -45,6 +45,23 @@ let listeners={
                 
                 
             };break;
+
+            case 'allOrders': {
+                leftSidebar.allOrders.addEventListener('click',()=>{
+                    if(isAdmin()) {
+                        api.allOrders().then(res=>{
+                            console.log( JSON.parse(res) );
+                        });
+                    }
+                });
+            };break;
+            case 'allUsers': {
+                leftSidebar.allUsers.addEventListener('click', ()=> {
+                    api.allUsers().then( result=> {
+                        console.log(result);
+                    });
+                });
+            }
         }
         
     },

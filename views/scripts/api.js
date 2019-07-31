@@ -40,5 +40,23 @@ let api={
                 }
             })
         });
+    },
+    allOrders:()=> {
+        return new Promise( (res,rej) =>{
+            if( isAdmin() ) {
+                $.get( BASE_URL + 'orders/all' ).then(result=>{
+                    res( result );
+                });
+            }
+
+        });
+        
+    },
+    allUsers:()=> {
+        return new Promise( (res,rej)=> {
+            if( isAdmin() ) {
+                
+            }
+        });
     }
 }
