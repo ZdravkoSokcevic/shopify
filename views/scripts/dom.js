@@ -31,11 +31,15 @@ let detailModal={
         detailModal.category.innerHTML=category;
     },
     fillModal:(dataType,data)=>{
-        detailModal.setTitle(data.name);
-        detailModal.setCategory(data.category);
-        (data.image!==undefined && data.image!=='')?detailModal.src=data.image:detailModal.src=dom.defaultImage;
-        // console.log(detailModal.detailImage);
-    listeners.closeModalBtnListener(detailModal.closeButton);
+        switch( dataType ) {
+            case ''
+            detailModal.setTitle(data.name);
+            detailModal.setCategory(data.category);
+            (data.image!==undefined && data.image!=='')?detailModal.src=data.image:detailModal.src=dom.defaultImage;
+            // console.log(detailModal.detailImage);
+            listeners.closeModalBtnListener(detailModal.closeButton);
+        }
+       
     }
 }
 
@@ -74,7 +78,7 @@ let userInfo={
 let leftSidebar={
     container:document.getElementsByClassName('left-navbar')[0],
     menu:document.getElementsByClassName('menus')[0],
-    myOrders:document.getElementsByClassName('My-orders')[0],
+    myOrders:document.getElementsByClassName('My-Orders')[0],
     allOrders:document.getElementsByClassName('all_orders')[0],
     allUsers:document.getElementsByClassName('all_users')[0]
 }
@@ -90,11 +94,20 @@ let styleBeforeLogin={
 let fillWithElements={
     menus:(menus)=>{
         // console.log(menus);
-        let data=JSON.parse(menus);
+        let data=JSON.parse( menus );
         for(let i=0;i<data.length;i++)
         {
             let objectData=data[i];
             fillDomCards.menu(objectData,i);
+        }
+    },
+    allOrders: (data)=> {
+        emptyCards();
+        let orders=JSON.parse( data );
+        for( let i=0;i<orders.length;i++ ) 
+        {
+            let order=orders[i];
+            fillDomCards.allOrders( order,i );
         }
     }
 }
@@ -102,7 +115,7 @@ let fillWithElements={
 let fillDomCards={
     menu:(data,i)=>{
         // console.log(data);
-
+        // emptyCards();
         //  main div is container,div is one card
         let mainDiv=document.querySelector('.cards');
         let card=document.createElement('div');
@@ -127,8 +140,47 @@ let fillDomCards={
         card.appendChild(price);
 
         listeners.addListener(card,data,'allMenus');
+    },
+    allOrders:( data,index )=> {
+        // emptyCards();
+
+        const Order= data[0].Order[0];
+        const Menu= data[1].Menu[0];
+        const User= data[2].User[0];
+
+        console.log( Order );
+        
+        let mainDiv=document.querySelector('.cards');
+        let card=document.createElement('div');
+        card.className+='card';
+
+        mainDiv.appendChild( card );
+
+        let image=document.createElement('img');
+        image.className+='card__image';
+        image.src=Order.image || '/assets/pictures/default-food.jpg';
+        card.appendChild(image);
+
+        let title=document.createElement('div');
+        title.className='card__title';
+        title.innerHTML=Menu.name;
+        card.appendChild(title);
+
+        let price=document.createElement('div');
+        price.className+='card__price';
+        price.innerHTML=Menu.price+' din';
+        card.appendChild(price);
+
+        card.addEventListener( 'click',detailModal.fillModal( 'allOrders',data ) );
     }
 }
 
+
+let emptyCards=()=> {
+    let mainContainer=dom.mainCards.children[0];
+     while (mainContainer.hasChildNodes()) {
+        mainContainer.removeChild( mainContainer.lastChild );
+    }
+}
 
 // console.log(dom.leftNavbar);

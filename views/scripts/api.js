@@ -9,43 +9,43 @@ const BASE_URL='http://localhost:9999/';
 
 let api={
     allMenus:()=>{
-        return new Promise((res,rej)=>{
+        return new Promise( (res,rej)=> {
             $.get(BASE_URL+'menu/all', '').then(data=>{
                 res(data);
             });
         });
     },
     sendLoginData:(formData)=>{
-        return new Promise((res,rej)=>{
+        return new Promise( (res,rej)=> {
             $.ajax({
                 type: 'POST',
-                url: BASE_URL+'user/login',
+                url: BASE_URL + 'user/login',
                 data: formData,
                 contentType:'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: "text",
                 statusCode:{
-                    404:()=>{
-                        console.log("not found");
+                    404:()=> {
+                        console.log( "not found" );
                     },
-                    500:()=>{
-                        console.log("Internal server error");
+                    500:()=> {
+                        console.log( "Internal server error" );
                     },
-                    400:()=>{
-                        console.log("Invalid request");
+                    400:()=> {
+                        console.log( "Invalid request" );
                     },
-                    200:(data)=>{
-                        res(data);
-                        console.log("All ok");
+                    200:(data)=> {
+                        res( data );
+                        console.log( "All ok" );
                     }
                 }
             })
         });
     },
     allOrders:()=> {
-        return new Promise( (res,rej) =>{
+        return new Promise( (res,rej) => {
             if( isAdmin() ) {
-                $.get( BASE_URL + 'orders/all' ).then(result=>{
-                    res( result );
+                $.get( BASE_URL + 'orders/all' ).then( data=> {
+                    res( data );
                 });
             }
 
@@ -55,7 +55,18 @@ let api={
     allUsers:()=> {
         return new Promise( (res,rej)=> {
             if( isAdmin() ) {
-                
+                $.get( BASE_URL + 'users/all' ).then( data=> {
+                    res( data );
+                });
+            }
+        });
+    },
+    myOrders:()=> {
+        return new Promise( (res,rej)=> {
+            if( isAdmin() ) {
+                $.get( BASE_URL + 'orderedById?id=' + getLoggedIn().id ).then( data=> {
+                    res( data );
+                });
             }
         });
     }

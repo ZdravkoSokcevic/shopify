@@ -49,7 +49,7 @@ let orderController={
                     try{
                         console.log(err);
                         let allData=[];
-                        allData.push({"Order:":doc});
+                        allData.push({"Order":doc});
                         let menuId=doc[0].menu;
                         let userId=doc[0].user;
                         Menu.find({id:menuId}).then(menuResult=>{
