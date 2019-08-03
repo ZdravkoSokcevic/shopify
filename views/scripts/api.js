@@ -65,6 +65,15 @@ let api={
         return new Promise( (res,rej)=> {
             if( isAdmin() ) {
                 $.get( BASE_URL + 'orderedById?id=' + getLoggedIn().id ).then( data=> {
+                   res( data );
+                });
+            }
+        });
+    },
+    menuById:( menuId )=> {
+        return new Promise( (res,rej)=> {
+            if( isLoggedIn() ) {
+                $.get( BASE_URL + 'orders/find?id=' + menuId ).then( data=> {
                     res( data );
                 });
             }

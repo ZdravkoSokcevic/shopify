@@ -271,23 +271,103 @@ body{
             width: 100%;
             height: 100%;
             // picture of modal
-            .detail__picture{
+            // --------------------------
+            //     all menu modal
+            // --------------------------
+            .menu-modal{
+                .detail__picture{
 
-                img{
-                    position: relative;
-                    width: 100%;
+                    img{
+                        position: relative;
+                        width: 100%;
+                    }
+                }
+                
+                // detail Info
+                .detail__about{
+                    display: flex;
+                    flex-direction: column;
+    
+                    .detail__about-title{
+                        color:blue;
+                    }
                 }
             }
             
-            // detail Info
-            .detail__about{
-                display: flex;
-                flex-direction: column;
+            // -----------
+            // Users modal
+            // -----------
 
-                .detail__about-title{
-                    color:blue;
+            .user_detail__modal{
+                position: absolute;
+                width: 100%;
+                height:400px;
+                // display: flex;
+                // flex-direction: row;
+                .user_detail__modal_img_div{
+                    overflow: hidden;
+                    .modal_img_div{
+                        height: 100%;
+                        margin:20px 0px 0px 20px;
+                        width: 200px;
+                        height: 100%;
+                        
+                    }
                 }
             }
+            // ----------------
+            // All orders modal
+            // ----------------
+            .all_orders_modal{
+                display: none;
+                .all_orders_modal__img{
+                    img{
+                        height: 100%;
+                    }
+                }
+                .all_orders_user{
+                    img{
+                        height: 100%;
+                    }
+                    .all_orders_user_info{
+
+                    }
+                }
+                .all_orders_description{
+
+                }
+            }
+
+            // -------------------------
+            //     My orders modal
+            // -------------------------
+            .my_orders_modal{
+                display:none;
+                .my_orders_modal__img{
+                    .my_orders_modal_img{
+                        
+                    }
+                }
+                .my_orders_modal__description{
+                    .my_orders_modal__description__title{
+
+                    }
+                    .my_orders_modal__description__category{
+
+                    }
+                    .my_orders_modal__description__order{
+
+                    }
+                    .my_orders_modal__description__price{
+
+                    }
+                    .my_orders_modal__description__total{
+
+                    }
+                }
+            }
+
+
         }
         .detail-modal__close_btn{
             position: absolute;

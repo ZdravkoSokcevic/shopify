@@ -6,10 +6,10 @@ let listeners={
         {
             case 'allMenus': {
                 leftSidebar.menu.addEventListener('click',(e)=>{
-                    console.log(data);
-                    toggle.show(detailModal.container);
-                    detailModal.intialStyle();
-                    detailModal.fillModal('menu',data);
+                    api.allMenus().then( data=> {
+                        fillWithElements.menus( data );
+                    });
+                    
                 });
             };break;
             case 'login': {
@@ -51,7 +51,6 @@ let listeners={
                     if( isAdmin() ) {
                         api.allOrders().then( res=> {
                             fillWithElements.allOrders( res );
-                            
                         });
                     }
                 });
@@ -59,7 +58,7 @@ let listeners={
             case 'allUsers': {
                 leftSidebar.allUsers.addEventListener('click', ()=> {
                     api.allUsers().then( data=> {
-                        console.log(data);
+                        fillWithElements.allUsers( data );
                     });
                 });
             };break;
@@ -68,7 +67,9 @@ let listeners={
                     leftSidebar.myOrders.addEventListener( 'click', ()=> {
                         if( isAdmin() ) {
                             api.myOrders().then( data=> {
-                                console.log( data );
+                                let Menu  = data[0].Menu;
+                                let Order = data[1].Order;
+                                fillWithElements.myOrders( data );
                             });
                         }
                        
@@ -79,8 +80,31 @@ let listeners={
         
     },
     // Ovdje treba napisati listener za kartice i sve premjestiti iz actions i fillModal
-    cardsClick:( type,data )=> {
-
+    cardsClick:( element,data,context )=> {
+        
+        switch(context)
+        {
+            case 'menuCard': {
+                element.addEventListener( 'click',()=> {
+                    detailModal.fillModal( 'allMenus',data );
+                });
+            };break;
+            case 'allOrderCard': {
+                element.addEventListener( 'click',()=> {
+                    detailModal.fillModal( 'allOrders',data );
+                });
+            };break;
+            case 'allUsers': {
+                element.addEventListener( 'click',()=> {
+                    detailModal.fillModal( 'allUsers',data );
+                });
+            };break;
+            case 'myOrders': {
+                element.addEventListener( 'click',()=> {
+                    detailModal.fillModal( 'myOrders',data );
+                });
+            }
+        }
     },
     closeModalBtnListener:(item)=>{
         item.addEventListener('click',(e)=>{

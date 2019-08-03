@@ -13,10 +13,34 @@ let dom={
 let detailModal={
     container:document.getElementsByClassName('detail-modal')[0],
     // For menus
-    title:document.getElementsByClassName('detail-modal')[0].children[0].children[1].children[0],
-    category:document.getElementsByClassName('detail-modal')[0].children[0].children[1].children[1],
-    detailImage:document.getElementsByClassName('detail-modal')[0].children[0].children[0].children[0],
+    title:document.getElementsByClassName('detail__about-titleText')[0],
+    category:document.getElementsByClassName('detail__about-category')[0],
+    detailImage:document.getElementsByClassName('detail__picture_img')[0],
     closeButton:document.getElementsByClassName('detail-modal__close_btn')[0],
+    // for all users
+    userContainer:document.getElementsByClassName('user_detail__modal')[0],
+    userImg:document.getElementsByClassName('user_detail_modal_img')[0],
+    userAbout:document.getElementsByClassName('user_detail__modal_about')[0],
+    // for all orders
+    ordersContainer:document.getElementsByClassName('all_orders_modal')[0],
+    orderImage:document.getElementsByClassName('all_orders_modal__img')[0],
+    orderTitle:document.getElementsByClassName('all_orders_title')[0],
+    orderUserContainer:document.getElementsByClassName('all_orders_user')[0],
+    orderUserPhoto:document.getElementsByClassName('all_orders_user_photo')[0],
+    orderUserInfo:document.getElementsByClassName('all_orders_user_info')[0],
+    orderDescription:document.getElementsByClassName('all_orders_description')[0],
+    // for logged in user orders
+    myOrdersContainer:document.getElementsByClassName('my_orders_modal')[0],
+    myOrdersImage:document.getElementsByClassName('my_orders_modal_img')[0],
+    myOrdersTitle:document.getElementsByClassName('my_orders_modal__description__title')[0],
+    myOrdersCategory:document.getElementsByClassName('my_orders_modal__description__category')[0],
+    myOrdersOrderCount:document.getElementsByClassName('my_orders_modal__description__order')[0],
+    myOrdersOrderPrice:document.getElementsByClassName('my_orders_modal__description__price')[0],
+    myOrdersOrderTotal:document.getElementsByClassName('my_orders_modal__description__total')[0],
+    // methods for manipulate detail model,showing data from api
+    show:()=> {
+        detailModal.container.style.display='block';
+    },
     intialStyle:()=>{
         detailModal.container.style.display='block';
         detailModal.container.style.zIndex=2000;
@@ -31,13 +55,70 @@ let detailModal={
         detailModal.category.innerHTML=category;
     },
     fillModal:(dataType,data)=>{
+        detailModal.container.focus();
+        let childs=document.body.childNodes;
+        document.body.childNodes.opacity=0.1;
+        
+        // $(document).children().css('opacity','0.1');
+        // // detailModal.container.css('opacity','1');
+        // $(detailModal.container).css('opacity','1');
+        
         switch( dataType ) {
-            case ''
-            detailModal.setTitle(data.name);
-            detailModal.setCategory(data.category);
-            (data.image!==undefined && data.image!=='')?detailModal.src=data.image:detailModal.src=dom.defaultImage;
-            // console.log(detailModal.detailImage);
-            listeners.closeModalBtnListener(detailModal.closeButton);
+            case 'allMenus':
+            {
+                detailModal.setTitle(data.name);
+                detailModal.setCategory(data.category);
+                (data.image!==undefined && data.image!=='')?detailModal.src=data.image:detailModal.src=dom.defaultImage;
+                // console.log(detailModal.detailImage);
+                detailModal.show();
+                document.getElementsByClassName('menu-modal')[0].style.display='none';
+        // document.getElementsByClassName('user_detail__modal_img_div')[0].style.display='none';
+                listeners.closeModalBtnListener(detailModal.closeButton);
+            };break;
+            case 'allOrders':
+            {
+                let Order=data.order;
+                let Menu=data.menu;
+                let User=data.user;
+                // console.log(Menu,User);
+                try{
+                    detailModal.orderImage.src=(Menu.image!==undefined && Menu.image!==null)?Menu.image:'/assets/images/default.jpg';
+                }catch(e){
+                    console.log(e);
+                }
+                detailModal.orderTitle.innerHTML=Menu.name;
+                // ----------
+                // To Do
+                // ----------
+                // detailModal.orderCount.innerHTML=Order.count;
+                // detailModal.total.innerHTML=Order.count*Menu.price;
+                try{
+                    detailModal.orderUserPhoto.innerHTML=User.image||'/assets/images/default.jpg';
+                }catch(e){
+                    console.log(e);
+                }
+               
+                detailModal.orderUserInfo.innerHTML=User.ime;
+                detailModal.orderDescription.innerHTML=Menu.description;
+                
+                detailModal.show();
+                listeners.closeModalBtnListener(detailModal.closeButton);
+            };break;
+            case 'myOrders':
+            {
+                console.log(data);
+                let Object=data;
+                detailModal.setTitle(data.menu.name);
+                detailModal.setCategory(data.menu.category);
+
+                detailModal.show();
+                listeners.closeModalBtnListener(detailModal.closeButton);
+            };break;
+            case 'allUsers':
+            {
+
+            }
+           
         }
        
     }
@@ -93,7 +174,7 @@ let styleBeforeLogin={
 //  Fill dom elements with api's data
 let fillWithElements={
     menus:(menus)=>{
-        // console.log(menus);
+        emptyCards();
         let data=JSON.parse( menus );
         for(let i=0;i<data.length;i++)
         {
@@ -109,18 +190,36 @@ let fillWithElements={
             let order=orders[i];
             fillDomCards.allOrders( order,i );
         }
+    },
+    myOrders: (data)=> {
+        let Orders = JSON.parse( data );
+        emptyCards();
+        // let myData=[];
+        for( let x=0;x<Orders.length;x++ )
+        {
+            fillDomCards.myOrders( Orders[x] );
+        }
+    },
+    allUsers: (data)=> {
+        let Users= JSON.parse( data );
+        emptyCards();
+        for( let x=0;x<Users.length;x++ ) 
+        {
+            fillDomCards.allUsers( Users[x] );
+        }
     }
 }
-
+// ------------------------------------
+        // FILL CENTRAL CARDS
+// ------------------------------------
 let fillDomCards={
     menu:(data,i)=>{
-        // console.log(data);
-        // emptyCards();
         //  main div is container,div is one card
         let mainDiv=document.querySelector('.cards');
+
         let card=document.createElement('div');
-        card.className+='card';
-        // console.log(dom.mainCards);
+        card.className+='card detail';
+        card.setAttribute('data-id',data.id);
         mainDiv.appendChild(card);
 
         let image=document.createElement('img');
@@ -139,16 +238,15 @@ let fillDomCards={
         price.innerHTML=data.price+' din';
         card.appendChild(price);
 
-        listeners.addListener(card,data,'allMenus');
+        listeners.cardsClick(card,data,'menuCard' );
+        // listeners.addListener(card,data,'allMenus');
     },
     allOrders:( data,index )=> {
-        // emptyCards();
-
+        
         const Order= data[0].Order[0];
         const Menu= data[1].Menu[0];
         const User= data[2].User[0];
 
-        console.log( Order );
         
         let mainDiv=document.querySelector('.cards');
         let card=document.createElement('div');
@@ -171,7 +269,74 @@ let fillDomCards={
         price.innerHTML=Menu.price+' din';
         card.appendChild(price);
 
-        card.addEventListener( 'click',detailModal.fillModal( 'allOrders',data ) );
+        let dataObject={
+            menu:   Menu,
+            order:  Order,
+            user:   User
+        };
+        listeners.cardsClick(card,dataObject,'allOrderCard');
+    },
+    myOrders:( data,index )=> {
+        let Menu=data.Menu[0];
+        let Order=data.Order;
+
+        
+        // calculate full price of order
+        let orderprice= (Menu.price*Order.count).toFixed(2);
+        
+        let mainDiv=document.querySelector('.cards');
+        let card=document.createElement('div');
+        card.className+='card';
+
+        mainDiv.appendChild( card );
+
+        let image=document.createElement('img');
+        image.className+='card__image';
+        image.src=Order.image || '/assets/pictures/default-food.jpg';
+        card.appendChild(image);
+
+        let title=document.createElement('div');
+        title.className='card__title';
+        title.innerHTML=Menu.name;
+        card.appendChild(title);
+
+        let price=document.createElement('div');
+        price.className+='card__price';
+        price.innerHTML=orderprice+' din';
+        card.appendChild(price);
+
+        let objectData={
+            menu        : Menu,
+            order       : Order,
+            orderprice  : orderprice
+        }
+        listeners.cardsClick( card,objectData,'myOrders' );
+    },
+    allUsers:( user,index )=> {
+        // emptyModal();
+
+
+        let mainDiv=document.querySelector('.cards');
+        let card=document.createElement('div');
+        card.className+='card';
+
+        mainDiv.appendChild( card );
+
+        let image=document.createElement('img');
+        image.className+='card__image';
+        image.src=user.image || '/assets/pictures/default-food.jpg';
+        card.appendChild(image);
+
+        let name=document.createElement('div');
+        name.className='card__title';
+        name.innerHTML=user.ime;
+        
+        name.style.position='absolute';
+        name.style.left='50%';
+        card.appendChild(name);
+
+        let userModal=document.getElementsByClassName('user_detail__modal')[0];
+
     }
 }
 
@@ -180,6 +345,16 @@ let emptyCards=()=> {
     let mainContainer=dom.mainCards.children[0];
      while (mainContainer.hasChildNodes()) {
         mainContainer.removeChild( mainContainer.lastChild );
+    }
+}
+
+let emptyModal=()=> {
+    let childrens=detailModal.container.children;
+    // console.log(childrens);
+    for( let x=0;x<childrens.length;x++ )
+    {
+        // console.log(childrens[x]);
+        childrens[x].style.display='none';
     }
 }
 
