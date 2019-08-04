@@ -93,7 +93,7 @@
                     <div class="card all_orders">All orders</div>
                     <div class="card all_users">Users</div>
             </div>
-
+            <i class="fa fa-plus-circle"></i>
         </div>
 
     </div>
@@ -158,7 +158,7 @@
                 <div class="col-12 col-sm-6 my_orders_modal__img">
                     <img src="/assets/pictures/default.jpg" class="my_orders_modal_img"/>
                 </div>
-                <div class="col-12 my_orders_modal__description">
+                <div class="col-12 col-sm-6 my_orders_modal__description">
                     <div class="col-12 my_orders_modal__description__title"></div>
                     <div class="col-12 my_orders_modal__description__category"></div>
                     <div class="col-12 my_orders_modal__description__order"></div>
@@ -166,7 +166,75 @@
                     <div class="col-12 my_orders_modal__description__total"></div>
                 </div>
             </div>
+            <!-- ----------------------------------------------------------
+                            Add new  user form
+            ---------------------------------------------------------- -->
+            <div class="col-12 add_user_modal row">
+                <div class="col-3"></div>
+                <div class="col-6 add_user_modal_form">
+                    <label for="">Profile picture</label>
+                    <div class="add_user_modal_form__image_div">
+                        <input type="file" id="add_user_modal_form_image-input">
+                    </div>
+                    <div class="add_user_modal_form__user-type">
+                        <button value="user" class="user-type__user user-type__button">User</button>
+                        <button value="admin" class="user-type__admin user-type__button">Admin</button>
+                    </div>
+                    <div class="add_user_modal_inputs">
+                        <input type="text" id="add_user_name_input" placeholder="Full name">
+                        <input type="email" id="add_user_email_input" placeholder="Email: someone@some.com">
+                        <input type="password" id="add_user_password_input" placeholder="Password">
+                        <input type="password" id="add_user_repeat_password" placeholder="Repeat password">
+                    </div>
+                    <div class="col-12 add_user_modal__buttons row">
+                        <div class="col-5 add_user__submit_button">
+                            <p>Submit</p>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-5 add_user__reset_button">
+                            <p>Reset</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 submit">
+                    
+                </div>
+            </div>
+            <!-- --------------------------------------------------------
+                        Add new food on menu
+            -------------------------------------------------------- -->
+            <div class="col-12 add_menu_modal row">
+                <div class="col-2"></div>
+                <div class="col-8 add_menu_modal_form">
+                    <div class="col-12 add_menu_modal_image-div">
+                        <input type="file" class="add_menu_modal_image-input" hidden>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-8 add_menu_main_div">
+                        <div class="col-12">
+                            <select name="" id="" class="add_menu__category">
+                                <option value="" disabled>Select a category</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" name="" id="add_menu__name" placeholder="Food name">
+                        </div>
+                        <div class="col-12">
+                            <input type="text" name="" id="add_menu__price">
+                        </div>
+                        <div class="col-12">
+                            <textarea name="" id="add_menu__description" cols="30" rows="10" placeholder="Opis jela/pica"></textarea>
+                        </div>
+                        
+
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="col-2"></div>
+            </div>
         </div>
+
+        
 
         <img src="/assets/icons/cancel.png" class="detail-modal__close_btn">
     </div>

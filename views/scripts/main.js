@@ -29,7 +29,7 @@ $(window).on('load',()=>{
     intializeStart();
     // console.log(data);
     styleBeforeLogin.loginBtn();
-    console.log(storage.get('loggedUser'));
+    // console.log(storage.get('loggedUser'));
 });
 
 
@@ -43,7 +43,7 @@ let intializeStart=()=>{
         fillWithElements.menus(data);
     });
     loginModal.intialStyle();
-    console.log(dom.loginButton);
+    // console.log(dom.loginButton);
     listeners.addListener(dom.loginButton,'','loginBtnClick');
 }
 

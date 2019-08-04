@@ -235,7 +235,13 @@ body{
                 display:none;
             }
 
-            
+        .fa-plus-circle{
+            right: 17%;
+            bottom: 2%;
+            font-size:45px;
+            z-index: 10000;
+            position: absolute;
+        }  
     }
     
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -259,7 +265,7 @@ body{
         top:10%;
         left:10%;
         background-color: #ddd0c0;
-        
+        z-index: 10000;
         margin: 0 !important;
         // display: flex;
         // flex-direction: row;
@@ -267,7 +273,7 @@ body{
         // HEADER OF DETAILS
         .header{
             margin:0!important;
-            position: relative;
+            position: absolute;
             width: 100%;
             height: 100%;
             // picture of modal
@@ -322,12 +328,12 @@ body{
                 display: none;
                 .all_orders_modal__img{
                     img{
-                        height: 100%;
+                        width: 100%;
                     }
                 }
                 .all_orders_user{
                     img{
-                        height: 100%;
+                        width: 100%;
                     }
                     .all_orders_user_info{
 
@@ -344,8 +350,9 @@ body{
             .my_orders_modal{
                 display:none;
                 .my_orders_modal__img{
+                    height: 100%;
                     .my_orders_modal_img{
-                        
+                        width: 100%;
                     }
                 }
                 .my_orders_modal__description{
@@ -368,6 +375,105 @@ body{
             }
 
 
+        }
+        // -------------------------------
+        //     Add new user form
+        // -------------------------------
+        .add_user_modal{
+            position: absolute;
+            width: 100%;
+            .add_user_modal_form{
+                width: 100%;
+                text-align: center;
+                .add_user_modal_form__image_div{
+                    background-color:lightblue;
+                    opacity: 0.4;
+                    border:2 px solid black;
+                    width: 150px;
+                    height:200px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    input[type="file"]{
+                       
+                        visibility: hidden;
+                        width: 100%;
+                    }
+                }
+                // user Type
+                .add_user_modal_form__user-type{
+                    text-align:left;
+                    .user-type__user{
+
+                    }
+                    .user-type__admin{
+
+                    }
+                }
+                .add_user_modal_inputs{
+                    margin-top:5px;
+                    input{
+                        margin-top:5px;
+                        width: 100%;
+                        height: 35px;
+                        font-size: 15px;
+                        color:blue;
+                        font-weight: bold;
+                        border-radius:5px;
+                    }
+                    input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                        font-size: 15px;
+                        margin-left:10px;
+                        color: red;
+                        opacity: 1; /* Firefox */
+                    }
+                      
+                    input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+                        font-size: 15px;
+                        margin-left:10px;
+                        color: red;
+                    }
+                      
+                    input::-ms-input-placeholder { /* Microsoft Edge */
+                        font-size: 15px;
+                        margin-left:10px;
+                        color: red;
+                    }
+                }
+                .add_user_modal__buttons{
+                    margin-top:20px!important;
+                    
+                    .add_user__submit_button{
+                        font-weight: 100;
+                        color:green;
+                        border:1px solid green;
+                        vertical-align: center;
+                        align-content: center;
+
+                        p{
+                            margin:10px !important;
+                        }
+                    }
+                    .add_user__submit_button:hover {
+                        background-color:#bfed91;
+                    }
+                    .add_user__reset_button{
+                        color:red;
+                        border:1px solid red;
+                        p{
+                            margin:10px !important;
+                        }
+                    }
+                }
+            }
+            .submit{
+                text-align: center;
+                .add_user_modal_submit{
+                    color:blue;
+                    width: 100px;
+                    bottom: 0;
+                    position: absolute;
+                }
+            }   
         }
         .detail-modal__close_btn{
             position: absolute;

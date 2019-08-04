@@ -89,7 +89,7 @@ module.exports={
                 ime:        request.body.ime,
                 email:      request.body.email,
                 password:   request.body.password,
-                type:       request.body.type
+                type:       request.body.type || 'admin'
             };
             // console.log(data);
             

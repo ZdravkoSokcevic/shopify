@@ -112,3 +112,37 @@ let listeners={
         })
     }
 }
+
+let simulateAction=( jqElement,action )=> {
+    // let event=new MouseEvent( action,{ 
+    //     bubbles     : true,
+    //     cancelable  : true,
+    //     view        : window 
+    // });
+
+    // let canceled=!element.dispatchEvent(event);
+    // // element.removeEventListener(action,)
+
+
+    // let event;
+    // if(document.createEvent) {
+    //     event = document.createEvent('event');
+    //     event.initEvent( action,true,true );
+    // } else {
+    //     event = document.createEventObject();
+    //     event.eventType = action;
+    // }
+
+    // event.eventName = action;
+
+    // if( document.createEvent ) {
+    //     element.dispatchEvent( event );
+    // } else {
+    //     element.fireEvent( 'on' + eventType,event ); 
+    // }
+    jqElement.show();
+    jqElement.focus();
+    jqElement.click();
+    jqElement.hide();
+    
+}

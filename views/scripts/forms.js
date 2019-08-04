@@ -31,6 +31,26 @@ let forms={
             // console.log(error);
         });
 
+    },
+    sendAddUserForm:()=> {
+        let data={
+            image       : detailModal.inputImage.value,
+            password    : detailModal.userPasswordInputField.value,
+            email       : detailModal.userEmailInputField.value,
+            ime         : detailModal.userNameInputField.value,
+            type        : detailModal.userTypeInputField
+        };
+        console.log(data);
+        let validate=validateBeforeSend.addUser(data);
+        console.log(validate);
+        if(validate.success && validate.error==null) {
+            // here data is good and ready to send to api
+            api.sendAddUserData(data).then( response=> {
+                console.log(response);
+            });
+        } else {
+            // validatation doesn't match
+        }
     }
 }
 
@@ -48,6 +68,30 @@ validateBeforeSend={
         else console.log("validacija nije prosla");
 
         
+    },
+    addUser:(data)=> {
+        let requiredFields=[data.ime,data.email,data.password];
+        for( let x=0;x<requiredFields.length;x++ ) 
+        {
+            if(requiredFields[x]=='' || requiredFields[x]==undefined) {
+                return {
+                    success:false,
+                    error:'Fields are required'
+                }
+            }
+        }
+        // Check if passwords doesn't match
+        if( detailModal.userPasswordInputField.value !== detailModal.userPsswdRepeatInputField.value ) {
+            return {
+                success:false,
+                error: 'Passwords doesn\'t match'
+            }
+        }
+        return {
+            success:true,
+            error: null
+        }
+
     }
 }
 

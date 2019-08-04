@@ -1,3 +1,6 @@
+const colors={
+}   
+
 let dom={
     logo:document.getElementById('logo').children[0],
     navbarRight:document.getElementById('nav-right'),
@@ -6,7 +9,8 @@ let dom={
     mainCards:document.getElementsByClassName('main-section')[0],
     leftNavbar:document.getElementsByClassName('left-navbar')[0],
     profileModal:document.getElementsByClassName('header__profile-modal')[0],
-    defaultImage:'/assets/pictures/default-food.jpg'   
+    defaultImage:'/assets/pictures/default-food.jpg',
+    addButton:document.getElementsByClassName('fa-plus-circle')[0]
 }
 
 
@@ -37,6 +41,29 @@ let detailModal={
     myOrdersOrderCount:document.getElementsByClassName('my_orders_modal__description__order')[0],
     myOrdersOrderPrice:document.getElementsByClassName('my_orders_modal__description__price')[0],
     myOrdersOrderTotal:document.getElementsByClassName('my_orders_modal__description__total')[0],
+    // Add new user form for admin
+    addUserForm:document.getElementsByClassName('add_user_modal')[0],
+    addUserImage:document.getElementsByClassName('add_user_modal_form__image_div')[0],
+    inputImage:document.getElementById('add_user_modal_form_image-input'),
+    addUserSubmit:document.getElementsByClassName('add_user__submit_button')[0],
+    addUserReset:document.getElementsByClassName('add_user__reset_button')[0],
+    userNameInputField:document.getElementById('add_user_name_input'),
+    userEmailInputField:document.getElementById('add_user_email_input'),
+    userPasswordInputField:document.getElementById('add_user_password_input'),
+    userPsswdRepeatInputField:document.getElementById('add_user_repeat_password'),
+    userTypeInputField:'user',
+    userTypeButtons:document.getElementsByClassName('user-type__button'),
+    userTypeUserButton:document.getElementsByClassName('user-type__user')[0],
+    userTypeAdminButton:document.getElementsByClassName('user-type__admin')[0],
+    // add new food to menu form for admin
+    addMenuContainer:document.getElementsByClassName('add_menu_modal')[0],
+    addMenuForm:document.getElementsByClassName('add_menu_modal_form')[0],
+    addImageDivField:document.getElementsByClassName('add_menu_modal_image-div')[0],
+    addImageInput:document.getElementById('add_menu_modal_image-input'),
+    addMenuCategoryOption:document.getElementsByClassName('add_menu__category')[0],
+    addMenuNameInputField:document.getElementsByClassName('add_menu__name')[0],
+    addMenuPriceInputField:document.getElementsByClassName('add_menu__price')[0],
+    addMenuDescriptionInputField:document.getElementsByClassName('add_menu__description')[0],
     // methods for manipulate detail model,showing data from api
     show:()=> {
         detailModal.container.style.display='block';
@@ -54,10 +81,15 @@ let detailModal={
     setCategory:(category)=>{
         detailModal.category.innerHTML=category;
     },
+    userTypeButtonsIntialStyle:()=> {
+        for( let x=0;x<detailModal.userTypeButtons.length;x++) {
+            detailModal.userTypeButtons[x].style.backgroundColor='gray';
+        }
+    },
     fillModal:(dataType,data)=>{
         detailModal.container.focus();
         let childs=document.body.childNodes;
-        document.body.childNodes.opacity=0.1;
+        // document.body.childNodes.opacity=0.1;
         
         // $(document).children().css('opacity','0.1');
         // // detailModal.container.css('opacity','1');
@@ -70,8 +102,9 @@ let detailModal={
                 detailModal.setCategory(data.category);
                 (data.image!==undefined && data.image!=='')?detailModal.src=data.image:detailModal.src=dom.defaultImage;
                 // console.log(detailModal.detailImage);
+                detailModal.setViewContext( 'allMenus' );
                 detailModal.show();
-                document.getElementsByClassName('menu-modal')[0].style.display='none';
+                // document.getElementsByClassName('menu-modal')[0].style.display='none';
         // document.getElementsByClassName('user_detail__modal_img_div')[0].style.display='none';
                 listeners.closeModalBtnListener(detailModal.closeButton);
             };break;
@@ -97,30 +130,105 @@ let detailModal={
                 }catch(e){
                     console.log(e);
                 }
-               
                 detailModal.orderUserInfo.innerHTML=User.ime;
-                detailModal.orderDescription.innerHTML=Menu.description;
+                detailModal.orderDescription.innerHTML=Menu.desc;
                 
+                detailModal.setViewContext( 'allOrders' );
                 detailModal.show();
                 listeners.closeModalBtnListener(detailModal.closeButton);
             };break;
             case 'myOrders':
             {
-                console.log(data);
+                console.log(data.menu);
                 let Object=data;
-                detailModal.setTitle(data.menu.name);
-                detailModal.setCategory(data.menu.category);
+                detailModal.myOrdersTitle.innerHTML=data.menu.name;
+                detailModal.myOrdersCategory.innerHTML=data.menu.category;
 
+                detailModal.setViewContext( 'myOrders' );
                 detailModal.show();
                 listeners.closeModalBtnListener(detailModal.closeButton);
             };break;
             case 'allUsers':
             {
 
-            }
+            };break;
            
         }
-       
+    },
+    setViewContext:(context)=> {
+        let childrens=detailModal.container.children[0];
+        console.log(childrens.children);
+        for( let x=0;x<childrens.children.length;x++) 
+        {
+            childrens.children[x].style.display='none';
+        }
+
+        switch( context )
+        {
+            case 'allOrders':
+            {
+                detailModal.ordersContainer.style.display='block';
+            };break;
+            case 'allMenus':
+            {
+                document.getElementsByClassName('menu-modal')[0].style.display='flex';
+                
+            };break;
+            case 'myOrders':
+            {
+                detailModal.myOrdersContainer.style.display='flex';
+                detailModal.myOrdersContainer.style.flexWrap='wrap';
+            };break;
+            case 'addUserAdmin':
+            {
+                detailModal.container.style.display='block';
+                detailModal.addUserForm.style.display='flex';
+                detailModal.addUserForm.style.flexDirection='row';
+
+                // enable div click to input image
+                detailModal.addUserImage.addEventListener( 'click',(inputClick)=> {
+                let element=$('#add_user_modal_form_image-input');
+                simulateAction( element,'click' );
+                },false);
+
+                detailModal.userTypeUserButton.style.backgroundColor='green';
+                detailModal.userTypeUserButton.addEventListener( 'click',(e)=> {
+                    detailModal.userTypeButtonsIntialStyle();
+                    detailModal.userTypeUserButton.style.backgroundColor='green';
+                    detailModal.userTypeInputField='user';
+                });
+                detailModal.userTypeAdminButton.addEventListener( 'click',(e)=> { 
+                    detailModal.userTypeButtonsIntialStyle();                   
+                    detailModal.userTypeAdminButton.style.backgroundColor='green';
+                    detailModal.userTypeInputField='admin';
+                });
+
+                // add what happens when we click submit and reset button
+                detailModal.addUserSubmit.addEventListener( 'click',()=> {
+                    if( isAdmin() ) {
+                        forms.sendAddUserForm();
+                    }
+                });
+                listeners.closeModalBtnListener(detailModal.closeButton);
+            };break;
+            case 'addMenus':
+            {
+                // need to fetch categories from api
+
+                detailModal.container.style.display='block';
+                // detailModal.style.display='flex';
+                detailModal.addUserForm.style.flexDirection='row';
+
+                
+                listeners.closeModalBtnListener(detailModal.closeButton);
+            }
+        }
+    },
+    showAddUserForm: ()=> {
+        detailModal.setViewContext( 'addUserAdmin' );
+    },
+    showAddMenusForm: ()=> {
+        detailModal.setViewContext( 'addMenus' );
     }
 }
 
@@ -175,15 +283,20 @@ let styleBeforeLogin={
 let fillWithElements={
     menus:(menus)=>{
         emptyCards();
+        expandCard( 'allMenus' );
         let data=JSON.parse( menus );
         for(let i=0;i<data.length;i++)
         {
             let objectData=data[i];
             fillDomCards.menu(objectData,i);
         }
+        dom.addButton.addEventListener( 'click',()=> {
+            detailModal.showAddMenusForm();
+        });
     },
     allOrders: (data)=> {
         emptyCards();
+        expandCard( 'allOrders' );
         let orders=JSON.parse( data );
         for( let i=0;i<orders.length;i++ ) 
         {
@@ -192,8 +305,9 @@ let fillWithElements={
         }
     },
     myOrders: (data)=> {
-        let Orders = JSON.parse( data );
         emptyCards();
+        expandCard( 'myOrders' );
+        let Orders = JSON.parse( data );
         // let myData=[];
         for( let x=0;x<Orders.length;x++ )
         {
@@ -203,6 +317,12 @@ let fillWithElements={
     allUsers: (data)=> {
         let Users= JSON.parse( data );
         emptyCards();
+        expandCard( 'allUsers' );
+        //  Add user button click
+
+        dom.addButton.addEventListener( 'click',()=> {
+            detailModal.showAddUserForm();
+        });
         for( let x=0;x<Users.length;x++ ) 
         {
             fillDomCards.allUsers( Users[x] );
@@ -314,7 +434,6 @@ let fillDomCards={
     },
     allUsers:( user,index )=> {
         // emptyModal();
-
 
         let mainDiv=document.querySelector('.cards');
         let card=document.createElement('div');
