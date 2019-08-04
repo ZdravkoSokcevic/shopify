@@ -1,4 +1,3 @@
-
 let forms={
     sendLoginForm:(email,password)=>{
         api.sendLoginData({email:email,password:password}).then(result=>{
@@ -51,6 +50,26 @@ let forms={
         } else {
             // validatation doesn't match
         }
+    },
+    sendAddMenuForm:()=> {
+        // console.log(detailModal.addMenuNameInputField);
+        let data= {
+            image   : detailModal.addImageInput.value,
+            name    : detailModal.addMenuNameInputField.value,
+            category: detailModal.addMenuCategoryOption.value,
+            desc    : detailModal.addMenuDescriptionInputField.value,
+            price   : detailModal.addMenuPriceInputField.value
+        }
+        let validate=validateBeforeSend.menuForm( data );
+        api.sendAddMenuForm( data ).then( response=> {
+            console.log(`Response: ${response}`);
+            if( response=='Success' ){
+                console.log("dobro je");
+                detailModal.container.style.display='none';
+                detailModal.addMenuContainer.style.display='none';
+            }
+                
+        });
     }
 }
 
@@ -92,6 +111,18 @@ validateBeforeSend={
             error: null
         }
 
+    },
+    menuForm:(data)=> {
+        let requiredFields=[data.category,data.name,data.desc,data.price];
+        for( let x=0;x<requiredFields.length;x++ ) 
+        {
+            if(requiredFields[x]=='' || requiredFields[x]==undefined) {
+                return {
+                    success:false,
+                    error:'Fields are required'
+                }
+            }
+        }
     }
 }
 

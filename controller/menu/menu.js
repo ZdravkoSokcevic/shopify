@@ -41,6 +41,16 @@ let menuController={
             console.log(data.exec());
             res(data.exec());
         });
+    },
+    allCategories:()=> {
+        return new Promise((res,rej)=>{
+            let query=Menu.find({}).select('category -_id').distinct('category');
+            query.exec((err,doc)=>{
+                if(err)
+                    rej(err);
+                res(doc);
+            });
+        });
     }
 
 }

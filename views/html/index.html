@@ -205,25 +205,39 @@
             -------------------------------------------------------- -->
             <div class="col-12 add_menu_modal row">
                 <div class="col-2"></div>
-                <div class="col-8 add_menu_modal_form">
-                    <div class="col-12 add_menu_modal_image-div">
-                        <input type="file" class="add_menu_modal_image-input" hidden>
+                <div class="col-8 add_menu_modal__form row">
+                    <div class="col-12 add_menu_modal__image-div row">
+                        <div class="col-2"></div>
+                        <div class="col-8 add_menu_modal__image-div_main">
+                                <input type="file" id="add_menu_modal__image-input" hidden>
+                        </div>
+                        
                     </div>
                     <div class="col-2"></div>
                     <div class="col-8 add_menu_main_div">
-                        <div class="col-12">
+                        <div class="col-12 menu_data">
                             <select name="" id="" class="add_menu__category">
-                                <option value="" disabled>Select a category</option>
+                                <option value="" disabled selected>Select a category</option>
                             </select>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 menu_data">
                             <input type="text" name="" id="add_menu__name" placeholder="Food name">
                         </div>
-                        <div class="col-12">
-                            <input type="text" name="" id="add_menu__price">
+                        <div class="col-12 menu_data">
+                            <input type="text" name="" id="add_menu__price" placeholder="Price">
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 menu_data">
                             <textarea name="" id="add_menu__description" cols="30" rows="10" placeholder="Opis jela/pica"></textarea>
+                            <!-- <div contenteditable="" class="add_menu__description"><p>Descritpion</p></div> -->
+                        </div>
+                        <div class="col-12 row">
+                            <!-- <div class="col-2"></div> -->
+                            <div class="add_menu__form-buttons row">
+                                <div class="col-5 add_menu__submit"><p>Submit</p></div>
+                                <div class="col-2"></div>
+                                <div class="col-5 add_menu__reset"><p>Reset</p></div>
+                            </div>
+                           
                         </div>
                         
 

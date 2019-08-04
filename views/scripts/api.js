@@ -79,11 +79,48 @@ let api={
             }
         });
     },
+    getCategories: ()=> {
+        return new Promise( (res,rej)=> {
+            if( isLoggedIn() ) {
+                $.get( BASE_URL + 'categories/all' ).then( categories=> {
+                    res( categories );
+                });
+            }
+        });
+    },
     sendAddUserData: (formData)=> {
         return new Promise( ( res,rej )=> {
             $.ajax({
                 method  : 'POST',
                 url     : BASE_URL + 'user/insert',
+                data    : formData,
+                contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: "text",
+                statusCode:{
+                    404:()=> {
+                        console.log( "not found" );
+                    },
+                    500:()=> {
+                        console.log( "Internal server error" );
+                    },
+                    400:()=> {
+                        console.log( "Invalid request" );
+                    },
+                    200:(response)=> {
+                        res( response );
+                        console.log( "All ok" );
+                    }
+                }
+
+            })
+        });
+    },
+    sendAddMenuForm:( formData )=> {
+        return new Promise( ( res,rej )=> {
+            console.log(formData.image);
+            $.ajax({
+                method  : 'POST',
+                url     : BASE_URL + 'menu/insert',
                 data    : formData,
                 contentType:'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: "text",

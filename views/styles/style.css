@@ -355,6 +355,80 @@ body .detail-modal .header .my_orders_modal .my_orders_modal__img .my_orders_mod
   width: 100%;
 }
 
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_modal__image-div {
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_modal__image-div .add_menu_modal__image-div_main {
+  height: 150px;
+  border: 1px solid red;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_modal__image-div .add_menu_modal__image-div_main .add_menu_modal__image-input {
+  display: none;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div .menu_data {
+  margin-top: 10px !important;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div .menu_data select {
+  height: 40px;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div .add_menu__category {
+  width: 80%;
+  margin-left: 10%;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div #add_menu__name {
+  width: 80%;
+  margin-left: 10%;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div #add_menu__price {
+  width: 80%;
+  margin-left: 10%;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div #add_menu__description {
+  max-height: 100px;
+  width: 80%;
+  margin-left: 10%;
+  background-color: #fff;
+  border: 1px solid black;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div .add_menu__form-buttons {
+  text-align: center;
+  margin-left: 10%;
+  width: 80%;
+  margin-top: 10px;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div .add_menu__form-buttons .add_menu__submit {
+  border: 1px solid green;
+  color: green;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div .add_menu__form-buttons .add_menu__submit p {
+  padding: 10px;
+  margin: 0;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div .add_menu__form-buttons .add_menu__reset {
+  border: 1px solid red;
+  color: red;
+}
+
+body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div .add_menu__form-buttons .add_menu__reset p {
+  padding: 10px;
+  margin: 0;
+}
+
 body .detail-modal .add_user_modal {
   position: absolute;
   width: 100%;

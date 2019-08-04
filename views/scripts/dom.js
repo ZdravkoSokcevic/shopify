@@ -58,12 +58,15 @@ let detailModal={
     // add new food to menu form for admin
     addMenuContainer:document.getElementsByClassName('add_menu_modal')[0],
     addMenuForm:document.getElementsByClassName('add_menu_modal_form')[0],
-    addImageDivField:document.getElementsByClassName('add_menu_modal_image-div')[0],
-    addImageInput:document.getElementById('add_menu_modal_image-input'),
+    addImageDivField:document.getElementsByClassName('add_menu_modal__image-div_main')[0],
+    addImageInput:document.getElementById('add_menu_modal__image-input'),
     addMenuCategoryOption:document.getElementsByClassName('add_menu__category')[0],
-    addMenuNameInputField:document.getElementsByClassName('add_menu__name')[0],
-    addMenuPriceInputField:document.getElementsByClassName('add_menu__price')[0],
-    addMenuDescriptionInputField:document.getElementsByClassName('add_menu__description')[0],
+    addMenuNameInputField:document.getElementById('add_menu__name'),
+    addMenuPriceInputField:document.getElementById('add_menu__price'),
+    addMenuDescriptionInputField:document.getElementById('add_menu__description'),
+    addMenuSubmitButton:document.getElementsByClassName('add_menu__submit')[0],
+    addMenuResetButton:document.getElementsByClassName('add_menu__reset')[0],
+    // addMenuImageInputFile:document.getElementById('add_menu_modal__image-input')[0],
     // methods for manipulate detail model,showing data from api
     show:()=> {
         detailModal.container.style.display='block';
@@ -217,9 +220,28 @@ let detailModal={
 
                 detailModal.container.style.display='block';
                 // detailModal.style.display='flex';
-                detailModal.addUserForm.style.flexDirection='row';
+                detailModal.addMenuContainer.style.display='flex';
+                detailModal.addMenuContainer.style.flexDirection='row';
+                api.getCategories().then( result=> {
+                    let res=JSON.parse(result);
+                    for( let x=0;x<res.length;x++ ) {
+                        let opt=document.createElement('option');
+                        opt.value=res[x];
+                        opt.innerHTML=res[x];
+                        detailModal.addMenuCategoryOption.appendChild(opt);
+                        detailModal.addMenuCategoryOption.style.display='block';
+                    }
+                    
+                });
+                detailModal.addImageDivField.addEventListener( 'click',()=> {
+                    let imageDiv=$('#add_menu_modal__image-input');
+                    simulateAction( imageDiv,'click' );
+                });
 
-                
+                detailModal.addMenuSubmitButton.addEventListener( 'click',()=> {
+                    forms.sendAddMenuForm();
+                });
+
                 listeners.closeModalBtnListener(detailModal.closeButton);
             }
         }

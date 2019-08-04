@@ -240,6 +240,12 @@ app.get('/orders/where',(req,res)=>{
    
 });
 
+app.get('/categories/all',(req,res)=>{
+    MenuController.allCategories().then( categories=>{
+        res.end(JSON.stringify(categories));
+    });
+});
+
 loggedInMiddleware('/orders/loggedIn','get');
 app.get('/orders/loggedIn',(req,res,next)=>{
     BaseController.ordersForLoggedIn(req,res,next).then((result)=>{
