@@ -82,6 +82,18 @@ module.exports={
     getLoggedIn:()=>{
         return 1;
     },
+    logout:(req,res)=> {
+        return new Promise( (resolve,rejection)=>{
+            if( req.session.user!==null) {
+                req.session = null;
+                res.statusCode=200;
+                resolve(true);
+            }else{
+                res.statusCode=404;
+                resolve(false);
+            }
+        });
+    },
     storeUsers:(request,response)=>{
         return new Promise((res,rej)=>{
             let data={

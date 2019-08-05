@@ -25,7 +25,7 @@
 // console.log("tu jee");
 
 
-$(window).on('load',()=>{
+jQuery(document).ready( function(){
     intializeStart();
     // console.log(data);
     styleBeforeLogin.loginBtn();

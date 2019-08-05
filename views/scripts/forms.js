@@ -1,26 +1,29 @@
 let forms={
     sendLoginForm:(email,password)=>{
         api.sendLoginData({email:email,password:password}).then(result=>{
-            // console.log(result);
             if(result.length && result){
-                // console.log("usao ovamo");
-                // storeInDb(result);
-                // console.log(result);
-                
                 //  Setup profile picture
                 dom.loginPicture.src=(result.image)?result.image:dom.defaultImage;
                 dom.loginPicture.addEventListener('click',()=>{
                     listeners.addListener(dom.loginPicture,'','profile-picture');
                 });
                 
-                storeLocal(JSON.parse(result));
-                // isLoggedIn();
-                console.log(isAdmin());
+                session.storeLocal(JSON.parse(result));
                 loginModal.intialStyle();
-
                 //  switch pictures
                 dom.loginButton.style.display='none';
                 dom.loginPicture.style.display='';
+                //      add Listener to logout user
+                dom.logoutButton.addEventListener( 'click',()=> {
+                    api.logout().then( res=> {
+                        if( res ) {
+                            session.removeLocal();
+                            userInfo.infoContainer.style.display='none';
+                            dom.loginButton.style.display='block';
+                            dom.loginPicture.style.display='none';
+                        }
+                    });
+                });
                 // detailModal.detailImage.style.display='';
             } else console.log("Invalid creditials");
             console.log(JSON.parse(localStorage.getItem('user')));
@@ -64,7 +67,6 @@ let forms={
         api.sendAddMenuForm( data ).then( response=> {
             console.log(`Response: ${response}`);
             if( response=='Success' ){
-                console.log("dobro je");
                 detailModal.container.style.display='none';
                 detailModal.addMenuContainer.style.display='none';
             }
@@ -133,17 +135,24 @@ let storeInDb=(data)=>{
     })
 }
 
-let storeLocal=(data)=>{
-    let storeObj={};
-    if(typeof data=='object'){
-        for(let x in data){
-            if(x!='_id' && x!='password'){
-                storeObj[x]=data[x];
+let session={
+    storeLocal:(data)=>{
+        let storeObj={};
+        if(typeof data=='object'){
+            for(let x in data){
+                if(x!='_id' && x!='password'){
+                    storeObj[x]=data[x];
+                }
             }
         }
+        localStorage.setItem('user',JSON.stringify(storeObj));
+    },
+
+    removeLocal:()=> {
+        if( getLoggedIn() && getLoggedIn()!=null) {
+            localStorage.removeItem('user');
+        }
     }
-    localStorage.setItem('user',JSON.stringify(storeObj));
-    
 }
 
 

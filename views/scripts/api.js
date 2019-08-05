@@ -21,6 +21,7 @@ let api={
                 type: 'POST',
                 url: BASE_URL + 'user/login',
                 data: formData,
+                async:true,
                 contentType:'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: "text",
                 statusCode:{
@@ -40,6 +41,16 @@ let api={
                 }
             })
         });
+    },
+    logout:()=> {
+        if( isLoggedIn() ) {
+            return new Promise( (res,rej)=> {
+                $.get( BASE_URL + 'user/logout').then( result=> {
+                    res(result);
+                });
+            });
+            
+        }
     },
     allOrders:()=> {
         return new Promise( (res,rej) => {

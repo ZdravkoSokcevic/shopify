@@ -63,9 +63,9 @@ let listeners={
                 });
             };break;
             case 'myOrders': {
-                if( isAdmin() ) {
+                if( isLoggedIn() ) {
                     leftSidebar.myOrders.addEventListener( 'click', ()=> {
-                        if( isAdmin() ) {
+                        if( isLoggedIn() ) {
                             api.myOrders().then( data=> {
                                 let Menu  = data[0].Menu;
                                 let Order = data[1].Order;

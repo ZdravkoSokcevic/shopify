@@ -112,6 +112,13 @@ app.post('/user/insert', (req, res) => {
     UserController.storeUsers(req,res);
 });
 
+loggedInMiddleware('/user/logout','get');
+app.get('/user/logout', (req,res)=> {
+    UserController.logout(req,res).then(result=> {
+        res.end(JSON.stringify(result));
+    });
+});
+
 
 app.get('/orders', (req, res) => {
     OrdersController.allOrders().then(data=>{

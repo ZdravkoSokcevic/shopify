@@ -10,7 +10,8 @@ let dom={
     leftNavbar:document.getElementsByClassName('left-navbar')[0],
     profileModal:document.getElementsByClassName('header__profile-modal')[0],
     defaultImage:'/assets/pictures/default-food.jpg',
-    addButton:document.getElementsByClassName('fa-plus-circle')[0]
+    addButton:document.getElementsByClassName('fa-plus-circle')[0],
+    logoutButton:document.getElementsByClassName('logout')[0]
 }
 
 
