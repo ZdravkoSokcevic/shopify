@@ -14,19 +14,10 @@ let forms={
                 dom.loginButton.style.display='none';
                 dom.loginPicture.style.display='';
                 //      add Listener to logout user
-                dom.logoutButton.addEventListener( 'click',()=> {
-                    api.logout().then( res=> {
-                        if( res ) {
-                            session.removeLocal();
-                            userInfo.infoContainer.style.display='none';
-                            dom.loginButton.style.display='block';
-                            dom.loginPicture.style.display='none';
-                        }
-                    });
-                });
+               listeners.addListener('','','logoutUser');
                 // detailModal.detailImage.style.display='';
             } else console.log("Invalid creditials");
-            console.log(JSON.parse(localStorage.getItem('user')));
+            // console.log(JSON.parse(localStorage.getItem('user')));
             clearFormData();
         })
         .catch(error=>{
@@ -42,9 +33,7 @@ let forms={
             ime         : detailModal.userNameInputField.value,
             type        : detailModal.userTypeInputField
         };
-        console.log(data);
         let validate=validateBeforeSend.addUser(data);
-        console.log(validate);
         if(validate.success && validate.error==null) {
             // here data is good and ready to send to api
             api.sendAddUserData(data).then( response=> {
@@ -72,6 +61,20 @@ let forms={
             }
                 
         });
+    },
+    makeOrderForm: data=> {
+        if( validateBeforeSend.makeOrder( data ) ) {
+            let user= getLoggedIn();
+            let formData={
+                user    : user.id,
+                menu    : data.menuId,
+                count   : detailModal.makeOrderInput.value
+            }
+
+            api.makeOrder( formData ).then( res=> {
+                console.log( res );
+            });
+        }
     }
 }
 
@@ -114,7 +117,7 @@ validateBeforeSend={
         }
 
     },
-    menuForm:(data)=> {
+    menuForm: ( data )=> {
         let requiredFields=[data.category,data.name,data.desc,data.price];
         for( let x=0;x<requiredFields.length;x++ ) 
         {
@@ -125,6 +128,9 @@ validateBeforeSend={
                 }
             }
         }
+    },
+    makeOrder: ( data )=> {
+        return ( data.price<=0 )? false : true;
     }
 }
 

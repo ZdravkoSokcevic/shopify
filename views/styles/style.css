@@ -219,6 +219,29 @@ body .main-section .cards .card__image {
   border-radius: 4%;
 }
 
+body .main-section .cards .my_orders__order {
+  z-index: 1000;
+  position: absolute;
+  color: blue;
+  height: 40px;
+  width: 40px;
+  bottom: -12px;
+  right: -11px;
+  font-size: 20px;
+}
+
+body .main-section .cards .my_orders__delete {
+  z-index: 1000;
+  position: absolute;
+  color: red;
+  height: 40px;
+  height: 40px;
+  bottom: -12px;
+  right: 40px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 body .main-section .cards::-webkit-scrollbar {
   width: 0px !important;
 }
@@ -427,6 +450,31 @@ body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_
 body .detail-modal .header .add_menu_modal .add_menu_modal__form .add_menu_main_div .add_menu__form-buttons .add_menu__reset p {
   padding: 10px;
   margin: 0;
+}
+
+body .detail-modal .make_order_modal .make_order__container .make_order__div {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  display: inline;
+  text-align: center;
+}
+
+body .detail-modal .make_order_modal .make_order__container .make_order__div .make_order__order-title {
+  margin-top: 50px;
+  color: blue;
+}
+
+body .detail-modal .make_order_modal .make_order__container .make_order__div #make_order__order-quantity:focus {
+  border-color: red;
+}
+
+body .detail-modal .make_order_modal .make_order__container .make_order__div .make_order__order-price {
+  color: red;
+}
+
+body .detail-modal .make_order_modal .make_order__container .make_order__div .make_order__order-submit {
+  background-color: lightblue;
+  height: 60px !important;
 }
 
 body .detail-modal .add_user_modal {

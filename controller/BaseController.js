@@ -12,15 +12,14 @@ let BaseController={
         for(let order of allOrd){
             // console.log(`Order: ${order}`);
             contents.push(await OrdersController.find(order._id));
-            console.log(`Contents: ${contents}`)
+            // console.log(`Contents: ${contents}`)
         }
         return contents;
     },
     // get all data by user id
-    findByUserId:(async function get(id){
+    findByUserId:async function get(id){
             let data=[];
             let orderData=await OrdersController.where('user',id);
-            // console.log(orderData);
             for(let order of orderData){
                 await MenuController.findById(order.menu).then(result=>{
                     data.push({"Menu":result,"Order":order});
@@ -28,7 +27,7 @@ let BaseController={
                 
             }
         return data;
-    }),
+    },
     ordersForLoggedIn:(req,res,next)=>{
         return new Promise((resolve,rejection)=>{
             let loggedUser=req.session.user;
@@ -64,14 +63,11 @@ let allOrders=()=>{
 let allData=(collection)=>{
     let allDatas=[];
             orders.forEach(element => {
-                // console.log(element._id);
                 OrdersController.find(element._id).then(buildedOrders=>{
                     // console.log(`BuildedOrders ${JSON.stringify(buildedOrders)}`);
                     allDatas.push(buildedOrders);
                 });
-                // allData.push(OrdersController.find(element._id));
             });
-            // console.log(`AllData ${JSON.stringify(allData)}`);
             if(allData!=[] && allData!={} && allData!=' '){
                 res(allData);
             }else{

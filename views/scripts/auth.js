@@ -12,5 +12,5 @@ let isLoggedIn=()=> {
 
 let getLoggedIn=()=> {
 
-    return ( isLoggedIn() )?isLoggedIn():false;
+    return ( isLoggedIn() )?JSON.parse( localStorage.getItem( 'user') ):false;
 }

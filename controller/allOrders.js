@@ -74,11 +74,11 @@ let joinDocs = (menus, users, orders) => {
             let user={};
             let menuObj={};
             // console.log(id);
-            userController.findById(orders[x].userId).then((res)=>{
+            userController.findById(orders[x].user).then((res)=>{
                 for(let x in res){
                     user[x]=res[x];
                 }
-                menuController.findById(orders[x].menuId).then((result)=>{
+                menuController.findById(orders[x].menu).then((result)=>{
                     // console.log(`Menu in orders: ${JSON.stringify(result)}`);
                     let obbj=JSON.parse(JSON.stringify(result));
                     // console.log(`OBBJ: ${JSON.stringify(obbj)}`);
@@ -98,7 +98,7 @@ let joinDocs = (menus, users, orders) => {
             });
             //  cloning two objects menu and user
             if(x==orders.length-1){
-                console.log(data);
+                // console.log(data);
                 
                 resolve(data);
             }

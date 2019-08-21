@@ -11,9 +11,10 @@ var url = "mongodb://localhost:27017/";
 let orderController={
     storeOrders : (req, res) => {
         let data = req.body;
+        console.log(data);
         let insertData = {
-            userId: data.user,
-            menuId: data.menu,
+            user: data.user,
+            menu: data.menu,
             count: data.count,
             date: new Date()
         }
@@ -31,7 +32,6 @@ let orderController={
     allOrders : (req, res) => {
         return new Promise((resolve,rejection)=>{
             require('../../model/orders').find({},(err, doc) => {
-                // console.log(doc);
                 if (err) {
                     rejection(err);
                 }else{
@@ -47,7 +47,6 @@ let orderController={
             let query=Orders.find({_id:oId}).populate('users').populate('menus');
                 query.exec((err,doc)=>{
                     try{
-                        console.log(err);
                         let allData=[];
                         allData.push({"Order":doc});
                         let menuId=doc[0].menu;
@@ -74,7 +73,6 @@ let orderController={
     where:(column,value)=>{
         return new Promise((res,rej)=>{
             try{
-                console.log(column);
 
                 let object={};
                 object[column]=value;

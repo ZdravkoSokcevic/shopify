@@ -18,7 +18,7 @@ async function insertData(){
     await insertMenu();
     await insertUsers();
     let success=insertOrders().then(result=>{
-        console.log(result);
+        // console.log(result);
     });
 
 }
@@ -26,7 +26,6 @@ async function insertData(){
 let insertMenu=()=>{
     return new Promise((res,rej)=>{
         let userData;
-    //    console.log(fs.lstatSync(menuPath).isDirectory());
             fs.readFile(menuPath,'utf8', (err, data) => {
                 if(err){
                     console.log(err);
@@ -37,8 +36,6 @@ let insertMenu=()=>{
                 for (let x = 0; x < doc.length; x++) {
                     let menuId=Math.random().toString(36).substring(5);
                     Object.assign(doc[x],{'id':menuId});
-                    
-                    // console.log(doc[x]);
                     let obj = doc[x];
                     menuModel.collection.insert(doc[x]);
                 }
@@ -80,9 +77,7 @@ let insertUsers=()=>{
 let insertOrders=()=>{
     return new Promise((res,rej)=>{
         menuModel.find({},(err,menus)=>{
-            // console.log(menus);
             for(let x=0;x<menus.length;x++){
-                console.log(menus[x].id);
                 insertOrderWithUser(menus[x].id);
             }
             // res(doc);
@@ -94,19 +89,16 @@ let insertOrderWithUser=(menuId)=>{
     if(menuId!==undefined){
         let userData=[];
         require('../controller/user/user').all().then(result=>{
-            // console.log(JSON.stringify(result));
-            let userId=result[Math.floor(Math.random()*result.length)].id;
-            console.log(userId);
+            let user=result[Math.floor(Math.random()*result.length)].id;
             let insertObject={
                 menu:menuId,
-                user:userId,
+                user:user,
                 count:Math.random()*100
             }
             ordersModel.collection.insert(insertObject);
         });
         // userModel.find({},(err,doc)=>{
         //     let userId=Math.floor(Math.random(doc.length));
-        //     console.log(userId);
         // });
     }
 }

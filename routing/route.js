@@ -5,7 +5,9 @@ const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
 
+//////////////////////////////////////////
 //      --Custom modules--              //
+//////////////////////////////////////////
 const UserController = require('../controller/user/user');
 const OrdersController = require('../controller/orders/order');
 const MenuController = require('../controller/menu/menu');
@@ -46,7 +48,9 @@ app.use('/',(req,res,next)=>{
     next();
 });
 
-
+////////////////////////////////////////////
+//          MIDDLEWARE ROUTES             //
+////////////////////////////////////////////
 //      --Admin helper middleware function
 let AdminMiddleware=(route,method)=>{
     // console.log(app[method]);
@@ -72,7 +76,7 @@ let loggedInMiddleware=(route,method)=>{
     })
 }
 
-
+//  The main route
 app.get('/',(req,res,next)=>{
     data = fs.readFile(view + 'index.html', function(err, data) {
         console.log(data);
@@ -81,43 +85,31 @@ app.get('/',(req,res,next)=>{
         res.end();
     });
 });
-// app.get('/', function(req, res) {
-//     data = fs.readFile(view + 'index.html', function(err, data) {
-//         console.log(data);
-//         res.setHeader('Content-Type', 'text/html');
-//         res.send(data);
-//         res.end();
-//     });
-// });
-
 
 
 app.get('/login', (req, res) => {
     res.render(view + 'login.ejs');
     res.end();
 });
-
 app.post('/user/login', (req, res) => {
     UserController.login(req,res).then(result=>{
         console.log(result);
         res.end(JSON.stringify(result));
     });
-    // res.end();
 });
-
-
-AdminMiddleware('/user/insert','post');
-app.post('/user/insert', (req, res) => {
-    console.log(req.body);
-    UserController.storeUsers(req,res);
-});
-
 loggedInMiddleware('/user/logout','get');
 app.get('/user/logout', (req,res)=> {
     UserController.logout(req,res).then(result=> {
         res.end(JSON.stringify(result));
     });
 });
+AdminMiddleware('/user/insert','post');
+app.post('/user/insert', (req, res) => {
+    console.log(req.body);
+    UserController.storeUsers(req,res);
+});
+
+
 
 
 app.get('/orders', (req, res) => {
@@ -137,8 +129,9 @@ app.get('/orders/all', (req, res) => {
     });
 });
 
-loggedInMiddleware('/orders/insert','post');
+// loggedInMiddleware('/orders/insert','post');
 app.post('/orders/insert', (req, res) => {
+    console.log(req.body);
     OrdersController.storeOrders(req, res);
 });
 

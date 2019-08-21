@@ -30,7 +30,6 @@ module.exports={
     findById:(userId)=>{
         return new Promise((res,rej)=>{
             User.find({"id":userId},(err,result)=>{
-                // console.log(result);
                 if(result!==null){
                     res(result);
                 }else{
@@ -47,7 +46,6 @@ module.exports={
                 if(err){
                     rej(err);
                 }else{
-                    console.log(user);
                     res(user);
                 }
             });
@@ -61,9 +59,7 @@ module.exports={
                 email:      req.email,
                 password:   req.password
             };
-            console.log(data);
             User.find(data,(err,doc)=>{
-                console.log(doc);
                 
                 if(!doc.length){
                     //not logged in
@@ -71,7 +67,6 @@ module.exports={
                 }else{
                     //logged in
                     request.session.user=doc[0];
-                    console.log(request.session);
                     resolve(doc[0]);
                 }
                 
@@ -103,13 +98,11 @@ module.exports={
                 password:   request.body.password,
                 type:       request.body.type || 'admin'
             };
-            // console.log(data);
             
             User.collection.insert(data,(err,docs)=>{
                 if(err){
                     rej(err);
                 }else{
-                    console.log(docs);
                     response.write(JSON.stringify(docs));
                     response.end();
                 }

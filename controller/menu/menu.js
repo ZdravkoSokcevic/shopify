@@ -8,13 +8,13 @@ let menuController={
     insertMenu:(req,res)=>{
         let data=req.body;
         let insertData={
+            id:makeRandomId('20'),
             category:data.category,
             name:data.name,
             desc:data.desc,
             price:data.price
         };
         Menu.collection.insert(insertData,(err,doc)=>{
-            //console.log(err);
             if(err){
                 res.writeHead(404);
                 res.write('Something went wrong');
@@ -30,7 +30,6 @@ let menuController={
             if (err) {
                 res.end(err);
             } else {
-                console.log(docs);
                 res.end(JSON.stringify(docs));
             }
         });
@@ -38,7 +37,6 @@ let menuController={
     findById:(menuId)=>{
         return new Promise((res,rej)=>{
             let data=Menu.find({id:menuId});
-            console.log(data.exec());
             res(data.exec());
         });
     },
@@ -53,6 +51,14 @@ let menuController={
         });
     }
 
+}
+let makeRandomId=(length)=>{
+    let letters='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let id='';
+    for(let x=0;x<length;x++){
+        id+=letters.charAt(Math.floor(Math.random()*letters.length));
+    }
+    return id;
 }
 
 module.exports=menuController;

@@ -18,32 +18,39 @@
 //         contentType:    'application/json',
 //         async:          true,
 //         success: function(response) {
-//             console.log(response);
 //         }
 //     });
 // }
-// console.log("tu jee");
 
 
 jQuery(document).ready( function(){
     intializeStart();
-    // console.log(data);
-    styleBeforeLogin.loginBtn();
-    // console.log(storage.get('loggedUser'));
+    //styleBeforeLogin.loginBtn();
 });
 
 
 let intializeStart=()=>{
+    if ( isLoggedIn() ) {
+        dom.loginPicture.style.display = 'block';
+        dom.loginButton.style.display = 'none';
+        dom.loginPicture.src=(getLoggedIn().image)?getLoggedIn().image:dom.defaultImage;
+        dom.loginPicture.addEventListener('click',()=>{
+            listeners.addListener(dom.loginPicture,'','profile-picture');
+        });
+        // add listener to logout
+        listeners.addListener('','','logoutUser');
+    }else{
+        // listeners.addListener('','','logoutUser');
+        styleBeforeLogin.loginBtn();
+    }
     listeners.addListener(leftSidebar.menu,'','allMenus');
     listeners.addListener(leftSidebar.allOrders,'','allOrders');
     listeners.addListener(leftSidebar.myOrders,'','myOrders');
     listeners.addListener(leftSidebar.allUsers,'','allUsers');
     api.allMenus().then(data=>{
-        // console.log(data);
         fillWithElements.menus(data);
     });
     loginModal.intialStyle();
-    // console.log(dom.loginButton);
     listeners.addListener(dom.loginButton,'','loginBtnClick');
 }
 

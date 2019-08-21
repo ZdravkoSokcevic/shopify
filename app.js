@@ -16,7 +16,7 @@ const appPort=9999;
 const exec=require('child_process').exec;
 
 let onExit=()=>{
-    console.log("izasao proces");
+    // console.log("izasao proces");
     process.exit();
 }
 

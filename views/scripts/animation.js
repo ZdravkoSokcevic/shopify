@@ -14,7 +14,6 @@ let toggle={
 let expandCard=( context )=> {
     for( let x=0;x<leftSidebar.container.children.length;x++ )
     {
-        // console.log( leftSidebar.container.children.length );
         leftSidebar.container.children[x].style.backgroundColor='#fff';
     }
     

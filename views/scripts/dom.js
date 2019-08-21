@@ -68,6 +68,14 @@ let detailModal={
     addMenuSubmitButton:document.getElementsByClassName('add_menu__submit')[0],
     addMenuResetButton:document.getElementsByClassName('add_menu__reset')[0],
     // addMenuImageInputFile:document.getElementById('add_menu_modal__image-input')[0],
+    //  make order reference to div,container and elements
+    makeOrderModal:document.getElementsByClassName('make_order_modal')[0],
+    makeOrderContainer:document.getElementsByClassName('make_order__container')[0],
+    makeOrderDiv:document.getElementsByClassName('make_order__div')[0],
+    makeOrderInput:document.getElementById('make_order__order-quantity'),
+    makeOrderSinglePrice:document.getElementsByClassName('make_order__single-price')[0],
+    makeOrderFullPrice:document.getElementsByClassName('make_order__order-price')[0],
+    makeOrderSubmit:document.getElementsByClassName('make_order__order-submit')[0],
     // methods for manipulate detail model,showing data from api
     show:()=> {
         detailModal.container.style.display='block';
@@ -105,7 +113,6 @@ let detailModal={
                 detailModal.setTitle(data.name);
                 detailModal.setCategory(data.category);
                 (data.image!==undefined && data.image!=='')?detailModal.src=data.image:detailModal.src=dom.defaultImage;
-                // console.log(detailModal.detailImage);
                 detailModal.setViewContext( 'allMenus' );
                 detailModal.show();
                 // document.getElementsByClassName('menu-modal')[0].style.display='none';
@@ -117,7 +124,6 @@ let detailModal={
                 let Order=data.order;
                 let Menu=data.menu;
                 let User=data.user;
-                // console.log(Menu,User);
                 try{
                     detailModal.orderImage.src=(Menu.image!==undefined && Menu.image!==null)?Menu.image:'/assets/images/default.jpg';
                 }catch(e){
@@ -143,7 +149,6 @@ let detailModal={
             };break;
             case 'myOrders':
             {
-                console.log(data.menu);
                 let Object=data;
                 detailModal.myOrdersTitle.innerHTML=data.menu.name;
                 detailModal.myOrdersCategory.innerHTML=data.menu.category;
@@ -161,7 +166,6 @@ let detailModal={
     },
     setViewContext:(context)=> {
         let childrens=detailModal.container.children[0];
-        console.log(childrens.children);
         for( let x=0;x<childrens.children.length;x++) 
         {
             childrens.children[x].style.display='none';
@@ -243,6 +247,14 @@ let detailModal={
                     forms.sendAddMenuForm();
                 });
 
+                listeners.closeModalBtnListener(detailModal.closeButton);
+            }
+            case 'makeOrder':
+            {
+                detailModal.container.style.display='block';
+                detailModal.makeOrderModal.style.display='flex';
+                detailModal.makeOrderContainer.style.display='flex';
+                detailModal.makeOrderDiv.style.display='flex';
                 listeners.closeModalBtnListener(detailModal.closeButton);
             }
         }
@@ -381,6 +393,36 @@ let fillDomCards={
         price.innerHTML=data.price+' din';
         card.appendChild(price);
 
+        let orderIcon=document.createElement('i');
+        // // orderIcon.className+='fal fa-file-export my_orders_order';
+        orderIcon.className+='fas fa-store my_orders__order';
+        orderIcon.style.display='none';
+        
+        let deleteIcon=document.createElement('i');
+        deleteIcon.className+='fa fa-trash-o my_orders__delete';
+        deleteIcon.style.display='none';
+        // console.log(deleteIcon);
+        card.addEventListener( 'mouseenter',()=> {
+            orderIcon.style.display='block';
+            deleteIcon.style.display='block';
+            card.style.color='red';
+            card.style.fontSize=25+'px';
+            card.style.fontWeight='bold';
+        });
+        card.addEventListener( 'mouseleave',()=>{
+            orderIcon.style.display='none';
+            deleteIcon.style.display='none';
+            card.style.color='black';
+            card.style.fontSize=18+'px';
+            card.style.fontWeight='normal';
+        });
+
+        listeners.addListener(orderIcon,data,'makeOrder');
+        listeners.addListener(deleteIcon,'','deleteOrder');
+        
+        card.appendChild(orderIcon);
+        card.appendChild(deleteIcon);
+
         listeners.cardsClick(card,data,'menuCard' );
         // listeners.addListener(card,data,'allMenus');
     },
@@ -425,7 +467,8 @@ let fillDomCards={
 
         
         // calculate full price of order
-        let orderprice= (Menu.price*Order.count).toFixed(2);
+        console.log( data );
+        let orderprice= ( Menu.price*Order.count ).toFixed(2);
         
         let mainDiv=document.querySelector('.cards');
         let card=document.createElement('div');

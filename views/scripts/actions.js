@@ -1,7 +1,6 @@
 var LOGIN_PICTURE_CLICK=0;
 let listeners={
     addListener:(item,data='',typeOf='')=>{
-        // console.log(typeOf);
         switch(typeOf)
         {
             case 'allMenus': {
@@ -16,7 +15,6 @@ let listeners={
                 item.addEventListener('click',forms.sendLoginForm);
             };break;
             case 'loginBtnClick': {
-                // console.log(loginModal.container);
                 dom.loginButton.addEventListener('click',()=>{
                     loginModal.show();
                     // when we click submit button
@@ -63,7 +61,6 @@ let listeners={
                 });
             };break;
             case 'myOrders': {
-                if( isLoggedIn() ) {
                     leftSidebar.myOrders.addEventListener( 'click', ()=> {
                         if( isLoggedIn() ) {
                             api.myOrders().then( data=> {
@@ -71,22 +68,68 @@ let listeners={
                                 let Order = data[1].Order;
                                 fillWithElements.myOrders( data );
                             });
-                        }
-                       
+                        }   
                     });
-                }
+            };break;
+            case 'logoutUser': {
+                dom.logoutButton.addEventListener( 'click',()=> {
+                    api.logout().then( res=> {
+                        if( res ) {
+                            session.removeLocal();
+                            userInfo.infoContainer.style.display='none';
+                            dom.loginButton.style.display='block';
+                            dom.loginPicture.style.display='none';
+                        }
+                    });
+                });
+            };break;
+            case 'makeOrder': {
+                // ToDo add form which has an input as quantity
+                item.addEventListener( 'click',()=> {
+                    if( isLoggedIn() ) {
+                        detailModal.setViewContext( 'makeOrder' );
+                        // detailModal.makeOrderInput.value='';
+                        detailModal.makeOrderSinglePrice.innerHTML= data.price;
+                        detailModal.makeOrderFullPrice.innerHTML= data.price;
+                        var quantity='';
+                        let fullPrice=1;
+                        detailModal.makeOrderInput.addEventListener( 'keyup',(e)=> {
+                            fullPrice= data.price*detailModal.makeOrderInput.value;
+                            detailModal.makeOrderFullPrice.innerHTML= fullPrice;
+                            // quantity+=e.key;
+                        });
+                        
+                        //  Here we make order
+                        var sendData={
+                            quantity    : detailModal.makeOrderInput.value,
+                            price       : data.price,
+                            menuId      : data.id
+                        }
+                        detailModal.makeOrderSubmit.addEventListener( 'click',()=> {
+                            
+                            forms.makeOrderForm( sendData );
+                        });
+                    }
+                });  
+            };break;
+            case 'deleteOrder':
+            {
+                item.addEventListener( 'click',()=> {
+                    
+                });
             }
         }
         
     },
     // Ovdje treba napisati listener za kartice i sve premjestiti iz actions i fillModal
     cardsClick:( element,data,context )=> {
-        
         switch(context)
         {
             case 'menuCard': {
-                element.addEventListener( 'click',()=> {
-                    detailModal.fillModal( 'allMenus',data );
+                element.addEventListener( 'click',(e)=> {
+                    if( e.target.className.includes('fas') )
+                        listeners.addListener( e.target,data,'makeOrder' );
+                    else detailModal.fillModal( 'allMenus',data );
                 });
             };break;
             case 'allOrderCard': {

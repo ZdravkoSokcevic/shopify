@@ -74,8 +74,9 @@ let api={
     },
     myOrders:()=> {
         return new Promise( (res,rej)=> {
-            if( isAdmin() ) {
+            if( isLoggedIn() ) {
                 $.get( BASE_URL + 'orderedById?id=' + getLoggedIn().id ).then( data=> {
+                    console.log(data);
                    res( data );
                 });
             }
@@ -100,6 +101,7 @@ let api={
         });
     },
     sendAddUserData: (formData)=> {
+        console.log("Usao da salje");
         return new Promise( ( res,rej )=> {
             $.ajax({
                 method  : 'POST',
@@ -126,7 +128,7 @@ let api={
             })
         });
     },
-    sendAddMenuForm:( formData )=> {
+    sendAddMenuForm: formData => {
         return new Promise( ( res,rej )=> {
             console.log(formData.image);
             $.ajax({
@@ -153,5 +155,40 @@ let api={
 
             })
         });
+    },
+    makeOrder: data=> {
+        return new Promise( (res,rej)=> {
+            if( isLoggedIn() ) {
+                
+                // console.log(data);
+                // console.log(formData);
+                // res('pera');
+                $.ajax({
+                    method  : 'POST',
+                    url     : BASE_URL + 'orders/insert',
+                    data    : data,
+                    contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+                    dataType: "text",
+                    statusCode:{
+                        404:()=> {
+                            console.log( "not found" );
+                        },
+                        500:()=> {
+                            console.log( "Internal server error" );
+                        },
+                        400:()=> {
+                            console.log( "Invalid request" );
+                        },
+                        200:(response)=> {
+                            res( response );
+                            console.log( "All ok" );
+                        }
+                    }
+    
+                });
+            }
+        });
+        
     }
 }
+

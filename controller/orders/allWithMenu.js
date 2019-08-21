@@ -29,7 +29,6 @@ function getAllFromOrders(){
     return new Promise((res,rej)=>{
         let data=[];
         // db.collection.aggregate($lookup:{from: 'menu'}).toArray((err,doc){
-        //     console.log(doc);
         // });
         db.collection('orders').find().toArray((err,doc)=>{
             if(doc){
@@ -45,7 +44,6 @@ function getAllFromOrders(){
 }
 
 function groupData(obj,res){
-    // console.log(obj.menu[0]._id);
     obj.menu=JSON.parse(JSON.stringify(obj.menu));
     obj.orders=JSON.parse(JSON.stringify(obj.orders));
     let menu=[];
@@ -57,15 +55,12 @@ function groupData(obj,res){
     for(let y in obj.orders){
         orders.push(JSON.stringify(obj.orders[y]));
     }
-    // console.log(typeof orders,typeof menu);
-    // console.log(JSON.parse(orders[0])._id);
     menu.forEach(menuItem => {
         let singleMenu=JSON.parse(menuItem);
         
         orders.forEach(ordersItem => {
             let order=JSON.parse(ordersItem);
             if(singleMenu._id==order._id){
-                // console.log('isti');
                 for(let x in order){
                     singleMenu[x]=order[x];
                 }
