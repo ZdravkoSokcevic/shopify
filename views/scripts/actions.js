@@ -114,8 +114,9 @@ let listeners={
             };break;
             case 'deleteOrder':
             {
-                item.addEventListener( 'click',()=> {
-                    
+                item.addEventListener( 'click',(e)=> {
+                    if( isAdmin() )
+                        api.deleteMenu(data);
                 });
             }
         }
@@ -127,8 +128,11 @@ let listeners={
         {
             case 'menuCard': {
                 element.addEventListener( 'click',(e)=> {
+                    // console.log(e.target);
                     if( e.target.className.includes('fas') )
                         listeners.addListener( e.target,data,'makeOrder' );
+                    else if(e.target.className.includes('fa'))
+                        listeners.addListener(e.target,data,'deleteOrder');
                     else detailModal.fillModal( 'allMenus',data );
                 });
             };break;

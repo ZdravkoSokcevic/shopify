@@ -189,6 +189,28 @@ let api={
             }
         });
         
-    }
+    },
+    deleteMenu: data=> {
+        let closeBtn=$('.detail-modal__close_btn');
+        $('.detailModal').hide();
+        // simulateAction(closeBtn,'click');
+        console.log(data.id);
+        let id=data.id;
+        if( isAdmin() ) {
+            $.ajax({
+                url: BASE_URL+'menu/delete/'+id,
+                method: 'GET',
+                statusCode: {
+                    204:()=> {
+                        console.log("dobro je");
+                        window.location.reload(true);
+                    },
+                    404:()=> {
+                        console.log("Not found");
+                    }
+                }
+            })
+        }
+    } 
 }
 

@@ -86,7 +86,9 @@ app.get('/',(req,res,next)=>{
     });
 });
 
-
+//////////////////////////////////////
+//         USER ROUTES              //
+//////////////////////////////////////
 app.get('/login', (req, res) => {
     res.render(view + 'login.ejs');
     res.end();
@@ -108,10 +110,32 @@ app.post('/user/insert', (req, res) => {
     console.log(req.body);
     UserController.storeUsers(req,res);
 });
+AdminMiddleware('/users/all','get');
+app.get('/users/all',(req,res)=>{
+    UserController.all().then(users=>{
+        res.end(JSON.stringify(users));
+    });
+});
+app.get('/users/get',(req,res)=>{
+    console.log(req.query.id);
+    UserController.findById(req.query.id).then(result=>{
+        if(result!==undefined){
+            res.end(JSON.stringify(result));
+        }
+    });
+});
+app.get('/users/find',(req,res)=>{
+    console.log(req.body.mail);
+    UserController.findByMail(req.body.mail).then(user=>{
+        res.end(JSON.stringify(user));
+    });
+});
 
 
 
-
+//////////////////////////////////////
+//          ORDER ROUTES            //
+//////////////////////////////////////
 app.get('/orders', (req, res) => {
     OrdersController.allOrders().then(data=>{
         res.render('html/orders',{'data':JSON.stringify(data)});
@@ -122,7 +146,9 @@ app.get('/orders', (req, res) => {
     //     res.end();
     // });
 });
-
+// app.get('/orders/all', (req, res) => {
+//     allOrders(req, res);
+// });
 app.get('/orders/all', (req, res) => {
     BaseController.allData().then(result=>{
         res.end(JSON.stringify(result));
@@ -134,7 +160,6 @@ app.post('/orders/insert', (req, res) => {
     console.log(req.body);
     OrdersController.storeOrders(req, res);
 });
-
 app.get('/orderedById',(req,res)=>{
     let id=req.query.id;
     // console.log(id);
@@ -142,51 +167,6 @@ app.get('/orderedById',(req,res)=>{
         res.end(JSON.stringify(orders));
     });
 });
-
-AdminMiddleware('/menu/insert','post');
-app.post('/menu/insert', (req, res) => {
-    MenuController.insertMenu(req, res);
-});
-
-app.get('/all', (req, res) => {
-    userOrders(req, res).then(result=>{
-        res.end(JSON.stringify(result));
-    });
-});
-
-app.get('/menu/all', (req, res) => {
-    MenuController.getAllMenus(req, res);
-});
-
-app.get('/orders/all', (req, res) => {
-    allOrders(req, res);
-});
-
-
-AdminMiddleware('/users/all','get');
-
-app.get('/users/all',(req,res)=>{
-    UserController.all().then(users=>{
-        res.end(JSON.stringify(users));
-    });
-});
-
-app.get('/users/get',(req,res)=>{
-    console.log(req.query.id);
-    UserController.findById(req.query.id).then(result=>{
-        if(result!==undefined){
-            res.end(JSON.stringify(result));
-        }
-    });
-});
-
-app.get('/users/find',(req,res)=>{
-    console.log(req.body.mail);
-    UserController.findByMail(req.body.mail).then(user=>{
-        res.end(JSON.stringify(user));
-    });
-});
-
 app.get('/orders/find',(req,res)=>{
     id=req.query.id;
     console.log(id);
@@ -195,33 +175,6 @@ app.get('/orders/find',(req,res)=>{
         res.end(JSON.stringify(order));
     });
 });
-
-app.get('/menu/find',(req,res)=>{
-    console.log(req.query.id);
-    if(req.query.id!==undefined){
-        MenuController.findById(req.query.id).then(response=>{
-            res.end(JSON.stringify(response));
-        });
-    }
-    
-});
-
-//  Get all orders just with menus
-app.get('/menu/orders',(req,res)=>{
-    Orders().then(result=>{
-        res.end(JSON.stringify(result));
-    });
-});
-
-
-//
-app.get('/order/get',(req,res)=>{
-    oneData(req).then(data=>{
-        res.end(JSON.stringify(data));
-    });
-    // res.end(JSON.stringify({error:'Not found'}));
-});
-
 ///     testing orders find method
 app.get('/orders/where',(req,res)=>{
     try{
@@ -236,19 +189,91 @@ app.get('/orders/where',(req,res)=>{
         let message='Queries not found';
         res.end(JSON.stringify(message));
     }
-    
-   
 });
-
-app.get('/categories/all',(req,res)=>{
-    MenuController.allCategories().then( categories=>{
-        res.end(JSON.stringify(categories));
+app.get('/order/get',(req,res)=>{
+    oneData(req).then(data=>{
+        res.end(JSON.stringify(data));
     });
+    // res.end(JSON.stringify({error:'Not found'}));
 });
-
 loggedInMiddleware('/orders/loggedIn','get');
 app.get('/orders/loggedIn',(req,res,next)=>{
     BaseController.ordersForLoggedIn(req,res,next).then((result)=>{
         res.end(JSON.stringify(result));
     });
 });
+
+
+//////////////////////////////////////
+//          MENU ROUTES             //
+//////////////////////////////////////
+AdminMiddleware('/menu/insert','post');
+app.post('/menu/insert', (req, res) => {
+    MenuController.insertMenu(req, res);
+});
+
+app.get('/all', (req, res) => {
+    userOrders(req, res).then(result=> {
+        res.end(JSON.stringify(result));
+    });
+});
+app.get('/menu/all', (req, res) => {
+    res.setHeader('Content-Type','application/json');
+    MenuController.getAllMenus(req, res);
+});
+app.get('/menu/find',(req,res)=>{
+    console.log(req.query.id);
+    if(req.query.id!==undefined) {
+        MenuController.findById(req.query.id).then(response => {
+            res.end(JSON.stringify(response));
+        });
+    }
+});
+app.get('/menu/delete/:id',(req,res)=> {
+    let id=req.params.id;
+    console.log(id);
+    if(id!==undefined && id!==null) {
+        MenuController.deleteById(id).then(result=> {
+            console.log(result);
+            if(result) {
+                res.statusCode=204;
+                res.end(JSON.stringify("Successifully deleted"));
+            }else{
+                res.statusCode=404;
+                res.end(JSON.stringify("not found"));
+            }
+        });
+    }else {
+        res.statusCode=404;
+        res.end(JSON.stringify("not found"));
+    }
+
+});
+
+//////////////////////////////////////
+//          COMBINED ROUTES         //
+//////////////////////////////////////
+//  Get all orders just with menus
+app.get('/menu/orders',(req,res)=>{
+    Orders().then(result=>{
+        res.end(JSON.stringify(result));
+    });
+});
+app.get('/categories/all',(req,res)=>{
+    MenuController.allCategories().then( categories=>{
+        res.end(JSON.stringify(categories));
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+

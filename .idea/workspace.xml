@@ -2,21 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38d33ad5-1cce-4015-b4dc-0629243f1b1c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/controller/BaseController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/BaseController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/allOrders.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/allOrders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/menu/menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/orders/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/orders/order.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routing/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routing/route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/html/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/scripts/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/scripts/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/scripts/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/scripts/dom.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/dom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/scripts/forms.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/forms.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/styles/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/views/styles/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/styles/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/views/styles/style.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +31,9 @@
   </component>
   <component name="ProjectId" id="1PafpgsfDiZNCDC03BjSvEZ3s7l" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../programiranje/react_proba/proba" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -67,6 +59,8 @@
       <updated>1566117312474</updated>
       <workItem from="1566117313664" duration="2538000" />
       <workItem from="1566129890774" duration="28000" />
+      <workItem from="1566495330843" duration="4229000" />
+      <workItem from="1566585347897" duration="13114000" />
     </task>
     <servers />
   </component>
