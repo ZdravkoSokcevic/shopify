@@ -25,9 +25,20 @@
 
 jQuery(document).ready( function(){
     intializeStart();
+    // document.body.onbeforeunload=(e)=>{
+    //     console.log("doso");
+    // preventBack(e);
+    // }
     //styleBeforeLogin.loginBtn();
 });
 
+let preventBack=(e)=>{
+    console.log("tu je");
+    // alert("tu si0");
+    // e.cancelBubble;
+    e.preventDefault();
+    alert("Klikno si");
+}
 
 let intializeStart=()=>{
     if ( isLoggedIn() ) {

@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38d33ad5-1cce-4015-b4dc-0629243f1b1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/menu/menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routing/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routing/route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/scripts/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/html/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/scripts/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/scripts/dom.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/dom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/scripts/main.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,22 +18,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/shopify.iml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/.gitignore" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectId" id="1PafpgsfDiZNCDC03BjSvEZ3s7l" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -60,7 +50,20 @@
       <workItem from="1566117313664" duration="2538000" />
       <workItem from="1566129890774" duration="28000" />
       <workItem from="1566495330843" duration="4229000" />
-      <workItem from="1566585347897" duration="13114000" />
+      <workItem from="1566585347897" duration="17989000" />
+      <workItem from="1566691955895" duration="400000" />
+      <workItem from="1566692384367" duration="383000" />
+      <workItem from="1566692783614" duration="322000" />
+      <workItem from="1566693136201" duration="48000" />
+      <workItem from="1566693204853" duration="590000" />
+      <workItem from="1566693812300" duration="208000" />
+      <workItem from="1566694037627" duration="566000" />
+      <workItem from="1566694637292" duration="38000" />
+      <workItem from="1566694692727" duration="532000" />
+      <workItem from="1566695746992" duration="52000" />
+      <workItem from="1566695859142" duration="52000" />
+      <workItem from="1566696530824" duration="3871000" />
+      <workItem from="1566736493883" duration="1922000" />
     </task>
     <servers />
   </component>

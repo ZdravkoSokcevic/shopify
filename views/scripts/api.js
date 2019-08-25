@@ -211,6 +211,50 @@ let api={
                 }
             })
         }
-    } 
+    },
+    deleteMyOrder: data=> {
+        let order=data;
+        let orderId=data._id;
+        let userId=data.user;
+        if( getLoggedIn().id===userId ) {
+            // Here we sure that i removed my order
+            $.ajax({
+                url: BASE_URL+'order/delete/'+orderId,
+                method: 'GET',
+                statusCode: {
+                    204:()=> {
+                        console.log("Successifully deleted");
+                        // Here we must trigger that call my orders again
+                    },
+                    404:()=> {
+                        console.log("error");
+                        // here we must fill error dialog
+                    }
+                }
+            })
+        }
+    },
+    adminDeleteOrder:data=> {
+        let order=data;
+        let orderId=data._id;
+        let userId=data.user;
+        if( isAdmin() ) {
+            // Here we sure that i removed my order
+            $.ajax({
+                url: BASE_URL+'order/delete/admin/'+orderId,
+                method: 'GET',
+                statusCode: {
+                    204:()=> {
+                        console.log("Successifully deleted");
+                        // Here we must trigger that call my orders again
+                    },
+                    404:()=> {
+                        console.log("error");
+                        // here we must fill error dialog
+                    }
+                }
+            })
+        }
+    }
 }
 

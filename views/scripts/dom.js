@@ -324,7 +324,7 @@ let fillWithElements={
     menus:(menus)=>{
         emptyCards();
         expandCard( 'allMenus' );
-        console.log(menus);
+        // console.log(menus);
         // let data=JSON.parse( menus );
         data=menus;
         for(let i=0;i<data.length;i++)
@@ -357,6 +357,7 @@ let fillWithElements={
         }
     },
     allUsers: (data)=> {
+        // console.log(data);
         let Users= JSON.parse( data );
         emptyCards();
         expandCard( 'allUsers' );
@@ -440,7 +441,7 @@ let fillDomCards={
         const Menu= data[1].Menu[0];
         const User= data[2].User[0];
 
-        console.log(data);
+        // console.log(data);
         let mainDiv=document.querySelector('.cards');
         let card=document.createElement('div');
         card.className+='card';
@@ -470,13 +471,13 @@ let fillDomCards={
         listeners.cardsClick(card,dataObject,'allOrderCard');
     },
     myOrders:( data,index )=> {
-        console.log(data);
+        // console.log(data);
         let Menu=data.Menu[0];
         let Order=data.Order;
         // console.log();
         
         // calculate full price of order
-        console.log( data );
+        // console.log( data );
         let orderprice= ( Menu.price*Order.count ).toFixed(2);
         
         let mainDiv=document.querySelector('.cards');
@@ -494,6 +495,24 @@ let fillDomCards={
         title.className='card__title';
         title.innerHTML=Menu.name;
         card.appendChild(title);
+
+        let deleteIcon= document.createElement('i');
+        deleteIcon.className+='fa fa-trash-o my_orders__delete';
+        deleteIcon.style.display='none';
+
+        // console.log(deleteIcon);
+        card.addEventListener( 'mouseenter',()=> {
+            deleteIcon.style.display='block';
+            card.style.color='red';
+            card.style.fontSize=25+'px';
+            card.style.fontWeight='bold';
+        });
+        card.addEventListener( 'mouseleave',()=>{
+            deleteIcon.style.display='none';
+            card.style.color='black';
+            card.style.fontSize=18+'px';
+            card.style.fontWeight='normal';
+        });
 
         let price=document.createElement('div');
         price.className+='card__price';
